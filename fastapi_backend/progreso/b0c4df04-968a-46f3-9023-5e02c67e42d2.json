@@ -1,0 +1,361 @@
+{
+  "estado": "completado",
+  "progreso": 29,
+  "total_preguntas": 29,
+  "resultados": [
+    {
+      "Respuesta": "## Early Termination Clause Analysis\n\nThe Agreement for the Supply of Explosives and Blasting Services contains clauses that allow the customer (SOCIÉTÉ DES MINES DE LAFIGUÉ S.A., referred to as \"the Company\") to terminate the contract early.\n\n### 1. Termination for Convenience (Clause 30.1)\n\n*   **Right to Terminate:** The Company may, at its sole discretion, terminate the Agreement for its convenience for any reason at any time.\n*   **Notice Period:** The Company must provide the Contractor (MAXAM COTE D’IVOIRE S.A.) with **one hundred and twenty (120) days' written notice**.\n*   **Associated Costs:** In the event of such termination, the Company is obligated to pay the Contractor:\n    *   Any amount outstanding under a Payment Certificate for Services performed prior to termination.\n    *   Demobilisation costs as set out in the Pricing Schedule (Schedule B).\n    *   The **Early Termination Amount**, as defined in Clause 1.1 and calculated in accordance with Section 6 of Schedule B.\n    *   **Note on Early Termination Amount:** Section 6 of Schedule B provides a table of \"Termination Fee\" amounts that are substantial and vary depending on the year of termination (e.g., $2,732,016.55 in Year 1, decreasing to $1,081,683.12 in Year 5). The phrasing \"no additional early termination fee will be payable\" in Schedule B, Section 6, should be interpreted as meaning no fees *beyond* those explicitly listed in Clause 30.2(i) (which includes the Early Termination Amount from the table) are due.\n\n### 2. Termination for Material Breach by Contractor (Clause 30.2)\n\n*   **Right to Terminate:** The Company may terminate the Agreement if the Contractor commits a \"Material Breach\" and fails to remedy it within a specified cure period. Examples of Material Breach by the Contractor include:\n    *   Violation of Anti-Bribery Requirements or related Relevant Policies.\n    *   Deliberate default.\n    *   Suffering an Insolvency Event.\n    *   Failure to maintain required Authorisations.\n    *   Acts of wilful misconduct.\n    *   Any incorrect or misleading material representation made by the Contractor (if not remedied within 20 Business Days of notice or awareness).\n    *   Failure to perform the Services or any part thereof in accordance with the Agreement (if not remedied within 20 Business Days of notice or awareness).\n*   **Notice Period:** The Company must provide the Contractor with **thirty (30) days' written notice** (\"Termination Notice\") after the occurrence of a continuing Material Breach.\n*   **Associated Costs:** If the Agreement is terminated due to a Material Breach by the Contractor, the Company is **not** liable for the Early Termination Amount (Clause 30.3). The Company would still be responsible for amounts outstanding for services properly performed prior to termination.\n\n### Summary of Customer's Termination Rights:\n\n*   **Convenience:** Yes, with 120 days' notice, but subject to significant Early Termination Amounts.\n*   **Contractor's Material Breach:** Yes, with 30 days' notice (after cure period), and without incurring the Early Termination Amount.\n\n---",
+      "Riesgo": "Medio",
+      "Pregunta": "Is there a clause that allows the customer to terminate the contract early and/or with a certain notice?  ",
+      "Sección": "Early Termination / or \n\nTermination Clause"
+    },
+    {
+      "Respuesta": "## Early Termination Clause Analysis for MAXAM\n\nThis analysis addresses MAXAM's ability to terminate the contract early and the associated implications, based on the provided \"Agreement for the Supply of Explosives and Blasting Services.\"\n\n### 1. MAXAM's Right to Terminate\n\nMAXAM (the \"Contractor\") has the right to terminate the Agreement under the following circumstances:\n\n*   **Material Breach by the Company:**\n    *   **Conditions:** As per Clause 30.2, MAXAM may terminate the Agreement if the Company (SOCIÉTÉ DES MINES DE LAFIGUÉ S.A.) commits a \"Material Breach.\" A specific example of a Material Breach by the Company is its failure to pay in full any undisputed amount set out in a Payment Certificate (Clause 30.2(d)).\n    *   **Cure Period:** If the Material Breach is capable of remedy, the Company has ten (10) Business Days to remedy the breach from the earlier of (i) MAXAM giving notice, or (ii) the Company becoming aware of the breach (Clause 30.2(f)).\n    *   **Notice Period:** If the Material Breach is not remedied within the Cure Period, MAXAM may terminate the Agreement by providing thirty (30) days' written notice (Clause 30.2(g)).\n\n*   **Force Majeure Event:**\n    *   **Conditions:** As per Clause 36.6, MAXAM may terminate the Agreement if an \"Event of Force Majeure\" (as defined in Clause 1.1) continues for a continuous period of sixty (60) or more days, or for successive periods totaling sixty (60) or more days within any ninety (90) day period.\n    *   **Notice Period:** MAXAM may terminate the Agreement \"forthwith\" (immediately) by written notice (Clause 36.6).\n\n### 2. Implications of Termination by MAXAM\n\nThe implications for MAXAM upon termination depend on the reason for termination:\n\n*   **Termination due to Material Breach by the Company (Clause 30.2(i)):**\n    *   **Outstanding Payments:** The Company shall pay MAXAM any amount outstanding under a Payment Certificate for Services performed prior to such termination.\n    *   **Demobilisation Costs:** The Company shall pay MAXAM its demobilisation costs as set out in the Pricing Schedule (Schedule B).\n    *   **Early Termination Amount:** The Company shall pay MAXAM the \"Early Termination Amount.\" This amount is a lump sum calculated based on the contract year of termination, as detailed in Schedule B, Section 6:\n        *   Year 1: US$2,732,016.55\n        *   Year 2: US$2,469,433.19\n        *   Year 3: US$2,006,849.84\n        *   Year 4: US$1,544,266.48\n        *   Year 5: US$1,081,683.12\n\n*   **Termination due to Force Majeure (Clause 36.1 and 30.3):**\n    *   **Cost Bearing:** Each Party shall bear any costs incurred by it in relation to an Event of Force Majeure (Clause 36.1).\n    *   **No Claim for Liabilities/Early Termination Amount:** If the Agreement terminates for any reason other than a Material Breach by the Company or the Company's convenience, MAXAM has no claim against the Company for any amount on account of any liability incurred as a result of or in connection with the termination, including the Early Termination Amount (Clause 30.3). This implies MAXAM would only be entitled to payment for services rendered up to the termination date, but not for future liabilities or the Early Termination Amount.\n\n### 3. Company's Right to Terminate for Convenience\n\nIt is important to note that the Company also has a unilateral right to terminate the Agreement for its convenience:\n\n*   **Conditions:** The Company may, at its sole discretion, terminate the Agreement for its convenience for any reason at any time (Clause 30.1).\n*   **Notice Period:** The Company must provide MAXAM one hundred and twenty (120) days' written notice (Clause 30.1).\n*   **Compensation:** Clause 30.2(i) states that if the Company terminates for convenience, it shall pay MAXAM the outstanding amounts, demobilisation costs, and the Early Termination Amount. However, Schedule B, Section 6, contains contradictory language, stating \"no additional early termination fee will be payable by the Company to the Contractor\" in this scenario. This creates an ambiguity regarding the Early Termination Amount if the Company exercises its convenience termination right.\n\n### Summary of Key Provisions:\n\n*   **MAXAM's Termination Rights:**\n    *   **Material Breach by Company:** Yes, with 30 days' notice after cure period.\n    *   **Force Majeure:** Yes, forthwith if event persists for 60+ days.\n*   **Compensation for MAXAM's Termination:**\n    *   **Material Breach by Company:** Outstanding payments, demobilisation costs, and the Early Termination Amount (as per Schedule B, Section 6 table).\n    *   **Force Majeure:** Each party bears its own costs; MAXAM has no claim for incurred liabilities or the Early Termination Amount.\n*   **Company's Termination for Convenience:** Yes, with 120 days' notice. Compensation for this scenario is ambiguous regarding the Early Termination Amount due to conflicting clauses.",
+      "Riesgo": "Medio",
+      "Pregunta": "Likewise, is there a clause that allows MAXAM to terminate the contract early and/or with a certain notice? \nDetail the implications of this (term, compensation, etc.).",
+      "Sección": "Early Termination / or \n\nTermination Clause"
+    },
+    {
+      "Respuesta": "### Exclusivity Clause Analysis\n\nThe document contains a clause related to the exclusive use of the Contractor's equipment for the services provided under this Agreement.\n\n**Content of the Clause:**\n*   **Clause 13.1 (Contractor’s Plant and Use of Vehicles)** states: \"The Contractor must provide all Contractor’s Plant necessary for the proper performance of the Services and its other obligations in accordance with applicable laws and the terms of this Agreement, and for the avoidance of doubt, all Contractor’s Plant will be used exclusively for the performance of the Services.\"\n\n**Implications:**\n*   **Dedicated Equipment:** This clause mandates that all plant and equipment supplied by MAXAM (the Contractor) for the \"Supply of Explosives and Blasting Services\" at the Lafigué mining complex must be used solely for the performance of these specific services.\n*   **Restriction on Contractor:** It restricts the Contractor from deploying or utilizing the same equipment for other projects or clients during the term of this Agreement. This ensures that the Company (SOCIÉTÉ DES MINES DE LAFIGUÉ S.A.) has dedicated access to the specified plant for its mining operations.\n*   **No Broader Service Exclusivity:** The document does not contain a broader exclusivity clause that would prevent the Company from engaging other service providers for similar services (e.g., at other sites or for different types of blasting) or restrict the Contractor from offering its services to other clients using different equipment. The exclusivity is specifically tied to the *use of the Contractor's Plant* for *these Services*.",
+      "Riesgo": "Bajo",
+      "Pregunta": "Is there an exclusivity clause? Detail its content and implications.",
+      "Sección": "Exclusivity \n(if aplicable)"
+    },
+    {
+      "Respuesta": "## Purchase (or Sale) Clause of a Minimum Amount\n\nBased on the review of the provided \"Agreement for the Supply of Explosives and Blasting Services,\" there is **no clause** that explicitly establishes a minimum purchase (or sale) amount per year or during the term of the contract that the Company (SOCIÉTÉ DES MINES DE LAFIGUÉ S.A.) is obligated to buy from the Contractor (MAXAM COTE D’IVOIRE S.A.).\n\n### Detailed Content and Communication Procedure:\n\nThe contract outlines the following related aspects, but none constitute a binding minimum purchase obligation for the Company:\n\n*   **Contractor's Production Capacity:**\n    *   Schedule A, Section 2.1(d) states that the Contractor's Manufacturing Plant will \"have a minimum production capacity of 600 tons of emulsion per month.\" This refers to the Contractor's capability to produce, not a minimum purchase commitment from the Company.\n*   **Tiered Pricing Based on Consumption:**\n    *   Schedule B, Section 3 (\"UNIT RATES\") details pricing for bulk explosives (e.g., RIOFLEX 7000/8000) that varies based on \"Total Consumption Monthly (Mt/Month).\" The prices are structured in tiers (e.g., MT > 1200, 1200 ≥ MT > 1000, 1000 ≥ MT > 600, MT ≤ 600). This means the unit price changes depending on the *actual volume consumed* by the Company in a given month, but it does not obligate the Company to purchase a specific minimum volume to qualify for a certain tier or at all.\n*   **Production Forecasts (for planning, not commitment):**\n    *   Clause 1.1 defines \"Production Forecasts\" as the \"Company’s quarterly production schedule issued to the Contractor in connection with the monthly mine planning that sets out on a monthly basis the volumes of Ore and Waste to be produced at the Mine, as amended from time to time by the Company.\"\n    *   Schedule A, Section 2.3 (\"Blasting Services\") further clarifies that the Contractor will \"attend and participate in weekly and monthly meetings with the Company to plan weekly and monthly programmes for the Blasting Services in conjunction with the Company’s overall programme of mining and production requirements.\"\n    *   This indicates that the Company provides forecasts for the Contractor's planning and service delivery, but these forecasts are not presented as binding minimum purchase commitments.\n*   **Contractor's Fuel Use Estimate:**\n    *   Schedule D, Section (h) requires the Contractor to \"provide an annual estimate of its estimated fuel use to the Company detailing the amounts estimated for Manufacturing Supply and a separate estimate for the Vehicle Supply.\" This is an estimate provided *by* the Contractor *to* the Company for fuel consumption, not a minimum purchase obligation *from* the Company.\n\nIn summary, while the contract details the Contractor's capacity and a tiered pricing structure based on actual consumption, it does not impose a minimum purchase obligation on the Company. The communication procedures mentioned relate to planning and forecasting, not to enforcing a minimum purchase quantity.",
+      "Riesgo": "Bajo",
+      "Pregunta": "Is there a purchase (or sale) clause of a minimum amount per year (or during the term of the contract)? \nDetail its content and communication procedure between the parties for this purpose. ",
+      "Sección": "Purchasing Products"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 51\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "In the case of sale of products by MAXAM, is it established or deduced that the product sold has a certain origin of production (country/region)? ",
+      "Sección": "Purchasing Products"
+    },
+    {
+      "Respuesta": "The payment terms for the Contractor (MAXAM COTE D’IVOIRE S.A.) are detailed primarily in Clause 9 (\"Payment\") and Clause 10 (\"Taxes\") of the Agreement.\n\n### Payment Terms Summary\n\n*   **Monthly Claims Submission:** The Contractor must submit a \"Monthly Claim\" to the Company's Representative within five (5) days after the end of each month in which Services have been performed (Clause 9.1).\n*   **Claim Content:** The Monthly Claim must include detailed calculations, adherence to the Pricing Schedule, and all evidence reasonably acceptable to the Company's Representative for verification (Clause 9.2).\n*   **Payment Certificate:** The Company's Representative will review the Monthly Claim within seven (7) days of receipt and issue a \"Payment Certificate\" stating the \"Service Fee\" payable. This certificate will confirm amounts or provide reasons for any discrepancies or deductions (Clause 9.3, 9.4).\n*   **Disputed Amounts:** If the Company disputes any amount in a Monthly Claim, it will notify the Contractor with reasons. The undisputed portion will be paid, while the disputed portion will be withheld until resolution (Clause 9.5).\n*   **Condition Precedent to Payment:** Payment of any Service Fee is conditional upon:\n    *   The Monthly Claim being made within thirty (30) days of the performance of the Services to which it relates.\n    *   Strict compliance by the Contractor with all requirements of Clauses 9 and 10 of the Agreement (Clause 9.7).\n*   **Withholding for Unpaid Amounts:** The Company may withhold payment for \"Unpaid Amounts\" (amounts owed by the Contractor to its personnel, subcontractors, or suppliers) if it has reasonable grounds to believe such amounts have not been paid. After giving the Contractor a 15-day opportunity to remedy, the Company may pay the \"Withheld Amount\" directly to the persons owed and set off this amount from payments due to the Contractor (Clause 9.8). The Company must provide reasonable notice and review any evidence provided by the Contractor disputing the Unpaid Amounts (Clause 9.9).\n*   **Contractor Indemnity:** The Contractor indemnifies the Company against all claims and liens related to wages and/or payments due to the Contractor's Personnel, subcontractors, and suppliers (Clause 9.10).\n*   **Adjustments:** Payment of a Service Fee does not prevent the Company from requiring further adjustments to ensure final amounts align with the Agreement, considering actual information not available at the time of initial calculation (Clause 9.11).\n*   **Right of Set-Off:** The Company may set off or deduct from any payment due to the Contractor any costs, charges, damages, liquidated sums, expenses, and other moneys payable by or to be reimbursed by the Contractor to the Company (Clause 9.12).\n*   **Taxes and VAT:**\n    *   The Contractor is responsible for all Taxes (excluding VAT) in connection with the supply of Goods and Services (Clause 10.1).\n    *   The Contract Price and rates in the Pricing Schedule are exclusive of VAT (Clause 7.4, 10.4).\n    *   The receiving Party (Company) must pay an additional amount equal to the VAT payable on the supply and remit it to the relevant Authority (Clause 10.5).\n    *   The Contractor must provide a \"Tax Invoice\" within three (3) days of receiving the Payment Certificate (Clause 10.6).\n    *   **Due Date for Payment:** The Company will pay the Tax Invoice by the later of:\n        *   Thirty (30) days after the date of receipt of that Tax Invoice; or\n        *   The end of the month following the month which is the subject of the Monthly Claim (Clause 10.7).\n    *   If the Contractor fails to provide a Tax Invoice within the required timeframe, the Company may withhold VAT payment until it is received (Clause 10.9).\n*   **Late Payment Interest:** If a Tax Invoice is not settled by the Due Date, the Contractor must issue a \"Late Payment Notice\" in writing. Interest may then be charged on the Late Payment at LIBOR plus 1.5% per year, calculated daily (Clause 10.10, 10.11).\n\n### Legal Risk Assessment\n\nThe payment terms present a **HIGH** legal risk for the Contractor due to several factors:\n\n*   **Extended Payment Cycle:** The \"later of\" clause for the Due Date (Clause 10.7) can significantly extend the payment period beyond a standard 30 days from invoice receipt, potentially pushing it to over 60 days from the end of the service month if the invoice is issued early in the subsequent month.\n*   **Strict Conditions Precedent:** Clause 9.7 imposes strict conditions for payment, including a 30-day deadline for submitting claims from the date of performance and strict compliance with all of Clauses 9 and 10. Failure to meet these could result in delayed or forfeited payments.\n*   **Company's Strong Withholding and Set-Off Rights:** Clauses 9.8 and 9.12 grant the Company broad unilateral rights to withhold payments for amounts owed by the Contractor to third parties (e.g., subcontractors, personnel) and to set off various costs, charges, or damages against payments due to the Contractor. This provides significant leverage to the Company and could impact the Contractor's cash flow.\n*   **Low Late Payment Interest Rate:** The interest rate for late payments (LIBOR + 1.5%) is relatively low and may not adequately compensate the Contractor for delayed payments or incentivize prompt payment by the Company.\n*   **Administrative Burden for Late Payment Interest:** The requirement for the Contractor to issue a \"Late Payment Notice\" before charging interest adds an administrative step and potential delay in recovering interest on late payments.",
+      "Riesgo": "Alto",
+      "Pregunta": "Payment Term: ",
+      "Sección": "Payment Terms"
+    },
+    {
+      "Respuesta": "## Payment Delay Compensation\n\nIn the event of a delay or non-payment of an invoice by the Company, the Contractor has a contractual right to compensation in the form of interest.\n\n### Key Provisions:\n\n*   **Due Date:** Payment of a Tax Invoice is due by the later of thirty (30) days after:\n    *   The date of receipt of that Tax Invoice; or\n    *   The end of the month following the month which is the subject of the Monthly Claim. (Clause 10.7)\n*   **Late Payment Interest:** If a Tax Invoice is not settled on or before the Due Date (a \"Late Payment\"), the Contractor may charge interest. (Clause 10.10)\n*   **Interest Rate:** The interest for such Late Payment may be charged on the basis of LIBOR plus 1.5% per year, calculated per day. (Clause 10.10)\n*   **Notice Requirement:** The Contractor must first issue a written \"Late Payment Notice\" to the Company before charging any interest for a Late Payment. This notice must specify that interest may be charged and when it will begin to accrue. (Clause 10.10, 10.11)\n*   **Company's Right of Set-Off:** Notwithstanding the above, the Company retains a broad right to set-off or deduct from any payment or moneys due to the Contractor all or any costs, charges, damages, liquidated sums, expenses, and any other moneys payable by or to be reimbursed by the Contractor to the Company on any account whatsoever. (Clause 9.12)\n\n### Summary of Compensation Duty:\n\nYes, in the event of a delay or non-payment of an undisputed invoice, the Company has a duty to compensate the Contractor by paying interest at a rate of LIBOR + 1.5% per annum, provided the Contractor issues the required Late Payment Notice.",
+      "Riesgo": "Medio",
+      "Pregunta": "In the event of a delay or non-payment of an invoice, is there a duty of compensation to the other party? ",
+      "Sección": "Payment Terms"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 19\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "What is the compensation percentage? ",
+      "Sección": "Payment Terms"
+    },
+    {
+      "Respuesta": "## Invoice Offsetting\n\nThe contract explicitly provides the Company with the option to offset invoices. This right is broadly defined and referenced in several clauses.\n\n### General Right of Set-Off\n\n*   **Clause 9.12** grants the Company a comprehensive right to set-off or deduct from any payment or moneys due or becoming due to the Contractor. This includes \"all or any costs, charges, damages, liquidated sums, expenses and any other moneys which are payable by or to be reimbursed by the Contractor to the Company on any account whatsoever.\" This right can be exercised \"after due consultation with the Contractor.\"\n\n### Specific Cases for Offsetting\n\nThe contract specifies various scenarios where the Company may exercise its right of set-off, including but not limited to:\n\n*   **Breach of Agency (Clause 4.3):** Costs, charges, expenses, or damages suffered by the Company if the Contractor acts as the Company's agent or binds the Company without prior written authority.\n*   **Unpaid Amounts to Subcontractors/Personnel (Clause 9.8):** If the Company reasonably believes the Contractor has not paid amounts due to its personnel, subcontractors, or suppliers, the Company may withhold and pay these \"Unpaid Amounts\" directly, then set-off an equivalent amount from payments due to the Contractor.\n*   **Unfit Facilities (Clause 11.5):** Costs and expenses incurred by the Company if it replaces \"Unfit Facilities\" (Contractor's Yard or Site Facilities deemed unsafe or non-compliant) on the Contractor's behalf due to the Contractor's failure to comply with a direction.\n*   **Faulty Equipment (Clause 13.7):** Costs and expenses incurred by the Company if it replaces \"Faulty Equipment\" (Contractor's Plant deemed unsafe or non-compliant) on the Contractor's behalf due to the Contractor's failure to comply with a direction.\n*   **Defective Goods (Clause 17.3 & 17.5):**\n    *   Costs and expenses incurred by the Company if it replaces \"Defective Goods\" (Goods not meeting requirements) due to the Contractor's failure to replace them.\n    *   Losses, damages, and costs suffered by the Company as a result of the supply or use of \"Defective Goods\" (referred to as a \"Defective Goods Remedy\").\n*   **Defective Services (Clause 18.3):** Costs incurred by the Company if it corrects \"Defective Supplies\" (Goods or Services with Defects) or causes others to do so, due to the Contractor's failure to promptly correct them.\n*   **Unsafe Conditions / Remedial Works (Clause 21.9):** Costs, damages, or expenses incurred by the Company if it performs or causes others to perform \"Remedial Works\" to prevent \"Unsafe Conditions\" (e.g., loss/damage to Services/property, personal injury, disruption to Mining Operations) due to the Contractor's fault.\n*   **Failure to Maintain Insurance (Clause 32.4):** Costs incurred by the Company if it effects and maintains required insurance policies because the Contractor failed to do so.\n*   **Back-Charged Company Provided Items (Schedule D):**\n    *   Costs for \"Vehicle Supply\" diesel provided by the Company (Schedule D(g)).\n    *   Costs for access to Site medical facilities and ambulance services (Schedule D(i)).\n    *   Costs for accommodation and meals provided to the Contractor's other personnel (Schedule D(l)).",
+      "Riesgo": "Alto",
+      "Pregunta": "Does the contract have the option of offsetting invoices? In what cases?",
+      "Sección": "Payment Terms"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 17\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "If during the term of the contract new services are developed or in greater quantity and proportion than those described, is there an option to modify the rates? ",
+      "Sección": "Rate"
+    },
+    {
+      "Respuesta": "## Rise and Fall Clause and Cost-Through Mechanism\n\nThe agreement includes a comprehensive \"Rise and Fall Adjustment\" clause, detailed in **Clause 8** and further elaborated in **Schedule P**. This mechanism serves as a cost-through agreement, allowing for the adjustment of prices based on changes in specific underlying cost indices.\n\n### Key Provisions:\n\n1.  **Existence of Adjustment Clause**:\n    *   **Clause 8.1** explicitly states that the \"Rise and Fall Adjustment must be determined in accordance with the provisions of Schedule P\".\n    *   **Clause 1.1** defines \"Rise and Fall Adjustment\" as \"the agreed formula for adjustment to the Pricing Schedule as set out at Schedule P, subject to the terms of clause eight (8) of this Agreement\".\n\n2.  **Items Subject to Adjustment**:\n    *   The adjustment applies to **Bulk Explosives** (specifically RIOFLEX MX 7000/8000/10000).\n    *   It also applies to **Consumables**, which include:\n        *   Initiation Systems & Packaged Explosives.\n        *   Labour Fees.\n        *   Operation & Maintenance Fees.\n\n3.  **Items Excluded from Adjustment**:\n    *   **Clause 8.2** specifies that the Rise and Fall Adjustment *does not* apply to:\n        *   Contractor’s Site Facilities lump sum.\n        *   Mobilisation lump sum.\n        *   Demobilisation lump sum.\n        *   Early Termination Amount lump sum.\n\n4.  **Indices and Formulas for Adjustment (Cost-Through Mechanism)**:\n    *   **Bulk Explosives**: The price (P1) is adjusted based on variations in:\n        *   **Ammonium Nitrate (ΔAN)**: Calculated using the average published Fertecon Baltic Sea price, sea freight, insurance, internal transport costs, and duties.\n        *   **Hexamine Nitrate (ΔHN)**: Calculated using the average published ICIS FOB Rotterdam price of Methanol, duties, inland transport, borders, clearance costs, sea freight, and port charges.\n        *   **Guar Gum (ΔGG)**: Calculated using the average cost of Guar Gum CIF Port of Africa, internal transport costs, and port charges.\n        *   Relevant exchange rates (USD to XOF, EUR to USD) are also factored into these calculations.\n    *   **Initiation Systems & Packaged Explosives**: The new product price (NAP) is adjusted using a formula that considers:\n        *   The Spanish Overall CPI (Consumer Price Index).\n        *   Transport costs increase/decrease (sea transport + inland transport).\n        *   The EUR to USD exchange rate.\n    *   **Labour Fees**: Adjusted based on the annual labour cost increase rate at the Mine Site.\n    *   **Operation & Maintenance Fees**: Adjusted based on the CPI Spain yearly variation.\n\n5.  **Application Frequency**:\n    *   Calculations are applied to payment rates from the month when a change in the value of one or more relevant indices is known.\n    *   There will be **no retrospective calculation** of previous progress claims.\n    *   **Exceptions for earlier application**: The Contractor may apply the adjustment before the standard monthly/yearly application date if:\n        *   The applicable ammonium nitrate index (Baltic FOB or other agreed index) shows a monthly variation of +/-10% from the previous month.\n        *   Any of the variables defined in Consumables R&F presents a variation of +/-10% during any quarter.\n\n6.  **Documentation Requirement**:\n    *   **Clause 8.3** requires any claim for a Rise and Fall Adjustment to be accompanied by certified supporting documents and information for verification by the Company.\n\n7.  **Review Mechanism**:\n    *   **Clause 8.4** allows either Party to issue a notice to review the Rise and Fall Adjustment method if it is considered no longer fair and reasonable after the first anniversary of the Commencement Date.\n    *   **Clause 8.5** directs unresolved disputes regarding the adjustment to the Dispute Resolution Process.\n\nThe \"Rise and Fall Adjustment\" mechanism clearly functions as a cost-through agreement, allowing the Contractor to adjust prices based on fluctuations in key input costs and economic indicators, thereby sharing market risks between the parties.",
+      "Riesgo": "Bajo",
+      "Pregunta": "Is there a clause to raise or lower rates (rise and fall) based on a certain index (for example, the nitrate index)? Has a cost-through been agreed? ",
+      "Sección": "Rise and Fall"
+    },
+    {
+      "Respuesta": "The contract includes provisions for early termination in the event of non-payment of undisputed invoices by the Company.\n\n### Suspension and Termination for Non-Payment\n\nThe contract addresses the possibility of suspending or terminating services due to non-payment of invoices under Clause 30 (Termination) and Clause 9 (Payment).\n\n**1. Suspension of Services:**\n*   The contract does **not** explicitly state a right for the Contractor to suspend services specifically due to the Company's non-payment of invoices.\n*   Clause 20.1 allows the Company to direct a suspension of services, but this is a general right of the Company, not a remedy for the Contractor in case of the Company's non-payment.\n*   Clause 20.6 allows the Company to suspend services due to the Contractor's fault, which is the opposite scenario.\n\n**2. Early Termination due to Non-Payment:**\n*   **Triggering Event:** Clause 30.2(d) defines a \"Material Breach\" as occurring \"If the Company fails to pay in full, in accordance with the terms of this Agreement, any amount set out in a Payment Certificate which is not in dispute.\"\n*   **Cure Period:**\n    *   As per Clause 30.2(f), no Material Breach will occur if the non-payment is capable of remedy and is remedied within **ten (10) Business Days** of the earlier of:\n        *   The non-breaching Party (Contractor) giving notice to the breaching Party (Company).\n        *   The breaching Party (Company) becoming aware of its Material Breach.\n    *   The Company may, at its sole discretion, extend this Cure Period at the Contractor's request.\n*   **Termination Notice:**\n    *   If the Material Breach (non-payment of undisputed amounts) is continuing after the Cure Period, the non-breaching Party (Contractor) \"may terminate this Agreement on written notice to the breaching Party providing **thirty (30) days’ notice** (“Termination Notice”).\" (Clause 30.2(g)).\n*   **Consequences of Termination for Company's Material Breach:**\n    *   Upon such termination, Clause 30.2(i) stipulates that the Company shall pay the Contractor:\n        *   The amount outstanding under a Payment Certificate for Services performed prior to termination (less any amounts previously paid and subject to Company's rights to dispute, suspend, withhold, or set-off payments).\n        *   Its demobilisation costs as set out in the Pricing Schedule (Schedule B).\n        *   The **Early Termination Amount** as set out in Schedule B, Section 6. This amount varies depending on the contract year of termination:\n            *   Year 1: $2,732,016.55\n            *   Year 2: $2,469,433.19\n            *   Year 3: $2,006,849.84\n            *   Year 4: $1,544,266.48\n            *   Year 5: $1,081,683.12",
+      "Riesgo": "Alto",
+      "Pregunta": "Does the contract include the possibility of suspending the service or even terminating early in the event of non-payment of invoices? Detail its content: notice period, notification, etc. ",
+      "Sección": "Suspension"
+    },
+    {
+      "Respuesta": "The following analysis addresses the tax responsibilities of the customer (Company) as outlined in the provided Agreement:\n\n### Taxes Responsibility\n\nBased on Clause 10 (\"Taxes\") and the definition of \"Tax or Taxes\" in Clause 1.1 of the Agreement:\n\n*   **Contractor's Responsibility for Taxes (excluding VAT):** Clause 10.1 explicitly states that \"The Contractor is responsible for the payment of all Taxes to the appropriate authorities in connection with the supply of the Goods and Services.\" The definition of \"Tax or Taxes\" in Clause 1.1 clarifies that this term \"excludes VAT.\"\n*   **Company's Responsibility for VAT:** Clause 10.4 states that the Contract Price and rates are \"exclusive of VAT.\" Clause 10.5 further specifies that if VAT is imposed on any supply made under the Agreement, \"the receiving Party [the Company] must pay (in addition to and at the same time as any VAT exclusive consideration is payable or to be provided for the supply) an additional amount equal to the VAT payable on the supply and will remit such amount to the relevant Authority.\"\n\n**Conclusion:**\nNo, the customer (Company) does not pay *all* the taxes involved in the subject matter of the contract. The Contractor is responsible for all \"Taxes\" (as defined, which excludes VAT). However, the Company is responsible for paying the Value Added Tax (VAT) in addition to the Contract Price, as is standard practice in many jurisdictions.",
+      "Riesgo": "Bajo",
+      "Pregunta": "Does the customer pay all the taxes involved in the subject matter of the contract?",
+      "Sección": "Taxes"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 47\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "When does the transfer of ownership of the products take place?",
+      "Sección": "Incoterms"
+    },
+    {
+      "Respuesta": "The provided \"AGREEMENT FOR THE SUPPLY OF EXPLOSIVES AND BLASTING SERVICES\" does not explicitly state an Incoterm agreed upon by the parties.\n\nWhile the document mentions:\n*   **Origin of equipment**: Some equipment (e.g., MSU Type E flexitruck, Modular Emulsion/Rioflex Plant) is mobilized from Spain, and the pricing schedule (Schedule B) includes \"Duties for information\" and \"International logistic & insurance\" in the Rise and Fall section (Schedule P).\n*   **Supply of Goods**: The \"Goods\" are defined as explosives manufactured and/or provided by the Contractor for use in the Blasting Services, with the Contractor assembling, installing, operating, and maintaining a manufacturing plant at the Site (Schedule A).\n\nThe agreement focuses on the provision of services and on-site manufacturing and supply of goods, rather than a direct international sale of goods where an Incoterm would typically be specified. No clause or schedule explicitly defines the Incoterm for the delivery of goods or equipment.",
+      "Riesgo": "Sin evaluar",
+      "Pregunta": "What is the Incoterm agreed by the parties?",
+      "Sección": "Incoterms"
+    },
+    {
+      "Respuesta": "## Subcontracting and Assignment Clause Analysis\n\n### 1. Subcontracting Clause\n\nYes, there is a subcontracting clause in the contract.\n\n*   **Clause 14.1** states that the Contractor may enter into subcontracts for **any part (but not the whole)** of the Services.\n*   **Prior Consent Required:** Yes, the Contractor requires the **prior written approval of the Company’s Representative**. This approval \"not to be unreasonably withheld.\"\n*   **Contractor's Responsibility:** **Clause 14.3** clarifies that any such approval does not relieve the Contractor from its warranties, obligations, or liabilities under the Agreement. The Contractor remains responsible for all acts, omissions, or defaults of its subcontractors.\n\n### 2. Assignment Clause\n\nYes, there is an assignment clause in the contract.\n\n*   **Clause 40** states: \"This Agreement is personal to the Parties and neither Party shall assign, transfer, mortgage, charge, declare a trust of, or deal in any other manner with any of its rights and obligations under this Agreement without the prior written consent of the other Party.\"\n*   **Prior Consent Required:** Yes, **prior written consent of the other Party** is required for any assignment, transfer, mortgage, charge, declaration of trust, or other dealing with rights and obligations under the Agreement.\n\n### Summary of Consent Requirements:\n\n*   **Subcontracting:** Requires prior written approval from the Company's Representative, which \"not to be unreasonably withheld.\"\n*   **Assignment:** Requires prior written consent from the other Party, with no qualification that such consent \"not be unreasonably withheld.\"",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a subcontracting/assignment clause in the contract? \nDetail whether prior consent is required by the other party. ",
+      "Sección": "Subcontracting"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 42\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a clause for termination of the contract or prior authorization by the counterparty in the event of a change of control of one of the parties? ",
+      "Sección": "Change of Control"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 35\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a clause in the contract that allows the customer/MAXAM to request a change from those employees who are not to their liking in a certain transaction? ",
+      "Sección": "Employee replacement"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 5\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a liability or Liquidated Damages clause? \nDetail its contents, incorporating maximum limits of liability, where appropriate.",
+      "Sección": "Matrix Responsibility "
+    },
+    {
+      "Respuesta": "## Exclusion of Indirect and Consequential Damages\n\nYes, indirect and consequential damages are generally excluded from the Contractor's liability to the Company under this Agreement, with specific exceptions.\n\n### Details:\n*   **Exclusion Clause:** Clause 34.1, titled \"Limitation of liability,\" explicitly states:\n    > \"To the extent permitted by applicable law and save in respect to misrepresentation and all Claims in relation to death, personal injury and damage to property, the Contractor’s aggregate liability to the Company arising from or in connection with Defective Goods and/or Defective Services is limited to a Defective Goods Remedy and/or a Defective Services Remedy as applicable and where a Defective Goods Remedy and/or a Defective Services Remedy applies, the Contractor will not be liable to the Company for any indirect or consequential loss, including any loss of use, loss of data, loss of goodwill, loss of production, loss of revenue, loss of business, loss of profit, business interruption, financing costs, loss of use of money, exemplary loss, special damages, punitive damages, loss of contract or loss of anticipated saving; (whether or not such loss was in the contemplation of the Parties at the time of entering into this Agreement).\"\n\n*   **Types of Damages Excluded:** The clause specifically excludes:\n    *   Indirect loss\n    *   Consequential loss\n    *   Loss of use\n    *   Loss of data\n    *   Loss of goodwill\n    *   Loss of production\n    *   Loss of revenue\n    *   Loss of business\n    *   Loss of profit\n    *   Business interruption\n    *   Financing costs\n    *   Loss of use of money\n    *   Exemplary loss\n    *   Special damages\n    *   Punitive damages\n    *   Loss of contract\n    *   Loss of anticipated saving\n\n*   **Exceptions to Exclusion:** The exclusion of indirect and consequential damages **does not apply** to:\n    *   Misrepresentation\n    *   Claims in relation to death\n    *   Claims in relation to personal injury\n    *   Claims in relation to damage to property\n\n*   **Further Limitations/Non-Limitations:**\n    *   Clause 34.2 limits the Contractor's liability for personal injury, death, or property damage due to negligent acts/omissions or willful misconduct to US$20,000,000.\n    *   Clause 34.3 states that no limitation of liability will apply in respect of Clause 10.1 (Taxes) and Clause 35 (Compliance with Anti-Bribery and Corruption Laws) where any loss or liability is caused by the Contractor’s negligence, fraud, willful or criminal misconduct.",
+      "Riesgo": "Medio",
+      "Pregunta": "Are indirect and consequential damages excluded?",
+      "Sección": "Matrix Responsibility "
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 35\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a requirement for any of the parties to provide a corporate guarantee or any other financial guarantee?\nDetail, where appropriate, obligations and amounts covered.",
+      "Sección": "Corporate Guarantees"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 36\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there an insurance clause? \nDetail what insurance is required, amounts and if it is required to provide once a certified year. ",
+      "Sección": "Insurance "
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 16\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "Has the content of the clause been reviewed by the Department of Insurance? ",
+      "Sección": "Insurance "
+    },
+    {
+      "Respuesta": "## Force Majeure Clause Analysis\n\nYes, the contract includes a comprehensive force majeure clause under **Clause 36: Force Majeure**, located on page 50 of the document.\n\n### Content of the Force Majeure Clause\n\n**1. Definition of \"Event of Force Majeure\" (Clause 36.1):**\nAn \"Event of Force Majeure\" is defined as any event or circumstance *not within the control* of the Party claiming Force Majeure, and which, by the exercise of reasonable care, the affected Party is *not able to prevent or overcome*. This includes:\n*   War (declared or undeclared), terrorism, revolution, riot, or insurrection.\n*   Lightning, fire, earthquake, or other natural disaster.\n*   General Strike (defined as a work stoppage persisting for 60 days or more, caused by a legally constituted and recognized trade union in the Country, not connected to or caused by any act or omission of a Party).\n*   Quarantine restriction, pandemic, or epidemic.\n*   Confiscation, nationalization, mobilization, commandeering, sanctions, blockade, requisition, licenses suspension, or any other act or failure to act of any local, state, or national government authority.\n\n**Exclusions from Force Majeure:**\nThe definition explicitly *excludes*:\n*   Mechanical or electrical breakdown or failure of equipment.\n*   A lack of, or an inability to use, money or available funds for any reason.\n*   Failure of a supplier or subcontractor to supply goods or services to the Contractor.\n\n**2. Obligations of the Affected Party (Clause 36.2, 36.3, 36.4, 36.5):**\n*   **Cost Bearing:** Each Party bears any costs incurred by it in relation to an Event of Force Majeure (Clause 36.1).\n*   **Reliance Limitation:** An Affected Party may only rely on an Event of Force Majeure to the extent that it *directly affects* the performance of its obligations (Clause 36.2(a)).\n*   **Resumption of Performance:** The Affected Party must resume performance of its obligations as soon as practicable after the termination or abatement of the Event of Force Majeure, and in any case, **no later than 30 days** after such termination or abatement (Clause 36.2(b), 36.3(d)).\n*   **Notice and Updates:** The Affected Party must:\n    *   **Promptly notify** the other Party, providing full particulars of the event and the probable delay.\n    *   **Regularly update** the other Party regarding the situation (Clause 36.3(a), 36.3(b)).\n*   **Mitigation:** The Affected Party must mitigate the effects of the Event of Force Majeure using all reasonable precautions and any reasonable alternative measures (Clause 36.3(c)).\n*   **General Strike:** An Affected Party must be proactive and act reasonably in attempting to settle any General Strike, unless settlement would be contrary to its reasonable commercial objectives. It is not required to contest the validity or enforceability of any applicable law or legally enforceable order by way of legal proceedings (Clause 36.4).\n*   **Partial Impact (Contractor):** If the Contractor is the Affected Party and the Event of Force Majeure affects only a discrete part of its operations or some Services, the Contractor must continue to perform its other obligations to the fullest extent possible (Clause 36.5).\n\n**3. Termination due to Force Majeure (Clause 36.6):**\n*   If an Event of Force Majeure continues for a **continuous period of 60 or more days**, or for **successive periods totalling 60 or more days within any period of 90 days**, either Party may terminate the Agreement forthwith by written notice to the other Party.\n\n### Legal Risk Assessment\n\nThe Force Majeure clause is well-drafted and comprehensive.\n*   **Clarity of Definition:** The definition of Force Majeure is clear, listing specific events and, importantly, explicitly excluding common operational and financial issues (mechanical breakdown, lack of funds, supplier failure) that parties might otherwise try to claim as force majeure. This clarity reduces ambiguity and potential for disputes.\n*   **Reasonable Obligations:** The obligations placed on the affected party, such as prompt notification, regular updates, and mitigation, are standard and fair.\n*   **Termination Period:** The 60-day threshold for termination, whether continuous or cumulative within a 90-day period, provides a reasonable timeframe for assessing the impact of the event and deciding on contract continuation, balancing the need for flexibility with business certainty.\n*   **Cost Allocation:** The provision that each party bears its own costs is a neutral and common approach.\n\nGiven the clear definitions, reasonable obligations, and balanced termination provisions, this clause effectively manages the risks associated with unforeseen events.",
+      "Riesgo": "Bajo",
+      "Pregunta": "Is there a force majeure clause in the contract? \nDetail its content (notice period, duration and period to be able to terminate the contract, etc.).",
+      "Sección": "Force Majeure"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 8\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a Law Change clause? Detail, where appropriate, implications and who assumes the obligations arising from it.",
+      "Sección": "Change of Law"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 13\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a hardship clause in the contract? Detail its contents. ",
+      "Sección": "Hardship"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 21\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "What is the Law applicable to the contract? ",
+      "Sección": "Applicable law; Courts or arbitration"
+    },
+    {
+      "Respuesta": "Error al procesar la pregunta: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 250000\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 25\n}\n]",
+      "Riesgo": "Alto",
+      "Pregunta": "In the event of discrepancy between the parties when applying the contract, which courts or arbitration are competent?",
+      "Sección": "Applicable law; Courts or arbitration"
+    },
+    {
+      "Respuesta": "The provided document is the \"AGREEMENT FOR THE SUPPLY OF EXPLOSIVES AND BLASTING SERVICES\" dated 27 September 2023. This document represents the initial contract between SOCIÉTÉ DES MINES DE LAFIGUÉ S.A. (the \"Company\") and MAXAM COTE D’IVOIRE S.A. (the \"Contractor\").\n\nThe question asks to detail points of \"the amendments that is being reviewed that imply an improvement or a worsening with respect to the original contract or with respect to the previous addenda signed (if applicable)\".\n\n**Analysis:**\nThe document provided is the original Agreement itself, not an amendment or an addendum to a pre-existing contract. Therefore, there are no \"amendments being reviewed\" within this document to compare against an \"original contract\" or \"previous addenda.\"\n\nClause 2.4 of the Agreement, titled \"Engagement and Term,\" states: \"The Term may be extended by the Company provided the Company provides written notice to the Contractor of its intention to extend the Term prior to three (3) months before the end of the Term with the agreement of the Contractor.\" This clause outlines the process for a potential future extension of the current Agreement's term, but it does not constitute an amendment to a prior contract or a review of proposed changes to an existing extension.\n\n**Conclusion:**\nBased on the document provided, it is not possible to detail points of amendments that imply an improvement or worsening with respect to an original contract or previous addenda, as the document itself is the Agreement being established.",
+      "Riesgo": "Sin evaluar",
+      "Pregunta": "Detail the points of the amendments that is being reviewed that imply an improvement or a worsening with respect to the original contract or with respect to the previous addenda signed (if applicable). ",
+      "Sección": "In case of contract extension\n(Amendments)"
+    }
+  ],
+  "fecha_inicio": "2025-07-02 11:34:11",
+  "preguntas_originales": [
+    {
+      "Número de Pregunta": 1,
+      "Pregunta": "Is there a clause that allows the customer to terminate the contract early and/or with a certain notice?  ",
+      "Sección": "Early Termination / or \n\nTermination Clause",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 2,
+      "Pregunta": "Likewise, is there a clause that allows MAXAM to terminate the contract early and/or with a certain notice? \nDetail the implications of this (term, compensation, etc.).",
+      "Sección": "Early Termination / or \n\nTermination Clause",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 3,
+      "Pregunta": "Is there an exclusivity clause? Detail its content and implications.",
+      "Sección": "Exclusivity \n(if aplicable)",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 4,
+      "Pregunta": "Is there a purchase (or sale) clause of a minimum amount per year (or during the term of the contract)? \nDetail its content and communication procedure between the parties for this purpose. ",
+      "Sección": "Purchasing Products",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 5,
+      "Pregunta": "In the case of sale of products by MAXAM, is it established or deduced that the product sold has a certain origin of production (country/region)? ",
+      "Sección": "Purchasing Products",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 6,
+      "Pregunta": "Payment Term: ",
+      "Sección": "Payment Terms",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 7,
+      "Pregunta": "In the event of a delay or non-payment of an invoice, is there a duty of compensation to the other party? ",
+      "Sección": "Payment Terms",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 8,
+      "Pregunta": "What is the compensation percentage? ",
+      "Sección": "Payment Terms",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 9,
+      "Pregunta": "Does the contract have the option of offsetting invoices? In what cases?",
+      "Sección": "Payment Terms",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 10,
+      "Pregunta": "If during the term of the contract new services are developed or in greater quantity and proportion than those described, is there an option to modify the rates? ",
+      "Sección": "Rate",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 11,
+      "Pregunta": "Is there a clause to raise or lower rates (rise and fall) based on a certain index (for example, the nitrate index)? Has a cost-through been agreed? ",
+      "Sección": "Rise and Fall",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 12,
+      "Pregunta": "Does the contract include the possibility of suspending the service or even terminating early in the event of non-payment of invoices? Detail its content: notice period, notification, etc. ",
+      "Sección": "Suspension",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 13,
+      "Pregunta": "Does the customer pay all the taxes involved in the subject matter of the contract?",
+      "Sección": "Taxes",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 14,
+      "Pregunta": "When does the transfer of ownership of the products take place?",
+      "Sección": "Incoterms",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 15,
+      "Pregunta": "What is the Incoterm agreed by the parties?",
+      "Sección": "Incoterms",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 16,
+      "Pregunta": "Is there a subcontracting/assignment clause in the contract? \nDetail whether prior consent is required by the other party. ",
+      "Sección": "Subcontracting",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 17,
+      "Pregunta": "Is there a clause for termination of the contract or prior authorization by the counterparty in the event of a change of control of one of the parties? ",
+      "Sección": "Change of Control",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 18,
+      "Pregunta": "Is there a clause in the contract that allows the customer/MAXAM to request a change from those employees who are not to their liking in a certain transaction? ",
+      "Sección": "Employee replacement",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 19,
+      "Pregunta": "Is there a liability or Liquidated Damages clause? \nDetail its contents, incorporating maximum limits of liability, where appropriate.",
+      "Sección": "Matrix Responsibility ",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 20,
+      "Pregunta": "Are indirect and consequential damages excluded?",
+      "Sección": "Matrix Responsibility ",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 21,
+      "Pregunta": "Is there a requirement for any of the parties to provide a corporate guarantee or any other financial guarantee?\nDetail, where appropriate, obligations and amounts covered.",
+      "Sección": "Corporate Guarantees",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 22,
+      "Pregunta": "Is there an insurance clause? \nDetail what insurance is required, amounts and if it is required to provide once a certified year. ",
+      "Sección": "Insurance ",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 23,
+      "Pregunta": "Has the content of the clause been reviewed by the Department of Insurance? ",
+      "Sección": "Insurance ",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 24,
+      "Pregunta": "Is there a force majeure clause in the contract? \nDetail its content (notice period, duration and period to be able to terminate the contract, etc.).",
+      "Sección": "Force Majeure",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 25,
+      "Pregunta": "Is there a Law Change clause? Detail, where appropriate, implications and who assumes the obligations arising from it.",
+      "Sección": "Change of Law",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 26,
+      "Pregunta": "Is there a hardship clause in the contract? Detail its contents. ",
+      "Sección": "Hardship",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 27,
+      "Pregunta": "What is the Law applicable to the contract? ",
+      "Sección": "Applicable law; Courts or arbitration",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 28,
+      "Pregunta": "In the event of discrepancy between the parties when applying the contract, which courts or arbitration are competent?",
+      "Sección": "Applicable law; Courts or arbitration",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 29,
+      "Pregunta": "Detail the points of the amendments that is being reviewed that imply an improvement or a worsening with respect to the original contract or with respect to the previous addenda signed (if applicable). ",
+      "Sección": "In case of contract extension\n(Amendments)",
+      "Boolean": "No"
+    }
+  ],
+  "fecha_modificacion": "2025-07-02 12:32:35",
+  "num_resultados": 29,
+  "fecha_finalizacion": "2025-07-02 12:32:35"
+}

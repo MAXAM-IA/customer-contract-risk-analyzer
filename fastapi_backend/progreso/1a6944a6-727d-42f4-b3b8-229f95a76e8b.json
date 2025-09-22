@@ -1,0 +1,361 @@
+{
+  "estado": "completado",
+  "progreso": 29,
+  "total_preguntas": 29,
+  "resultados": [
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a clause that allows the customer to terminate the contract early and/or with a certain notice?  ",
+      "Sección": "Early Termination / or \n\nTermination Clause"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Likewise, is there a clause that allows MAXAM to terminate the contract early and/or with a certain notice? \nDetail the implications of this (term, compensation, etc.).",
+      "Sección": "Early Termination / or \n\nTermination Clause"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there an exclusivity clause? Detail its content and implications.",
+      "Sección": "Exclusivity \n(if aplicable)"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a purchase (or sale) clause of a minimum amount per year (or during the term of the contract)? \nDetail its content and communication procedure between the parties for this purpose. ",
+      "Sección": "Purchasing Products"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "In the case of sale of products by MAXAM, is it established or deduced that the product sold has a certain origin of production (country/region)? ",
+      "Sección": "Purchasing Products"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Payment Term: ",
+      "Sección": "Payment Terms"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "In the event of a delay or non-payment of an invoice, is there a duty of compensation to the other party? ",
+      "Sección": "Payment Terms"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "What is the compensation percentage? ",
+      "Sección": "Payment Terms"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Does the contract have the option of offsetting invoices? In what cases?",
+      "Sección": "Payment Terms"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "If during the term of the contract new services are developed or in greater quantity and proportion than those described, is there an option to modify the rates? ",
+      "Sección": "Rate"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a clause to raise or lower rates (rise and fall) based on a certain index (for example, the nitrate index)? Has a cost-through been agreed? ",
+      "Sección": "Rise and Fall"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Does the contract include the possibility of suspending the service or even terminating early in the event of non-payment of invoices? Detail its content: notice period, notification, etc. ",
+      "Sección": "Suspension"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Does the customer pay all the taxes involved in the subject matter of the contract?",
+      "Sección": "Taxes"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "When does the transfer of ownership of the products take place?",
+      "Sección": "Incoterms"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "What is the Incoterm agreed by the parties?",
+      "Sección": "Incoterms"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a subcontracting/assignment clause in the contract? \nDetail whether prior consent is required by the other party. ",
+      "Sección": "Subcontracting"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a clause for termination of the contract or prior authorization by the counterparty in the event of a change of control of one of the parties? ",
+      "Sección": "Change of Control"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a clause in the contract that allows the customer/MAXAM to request a change from those employees who are not to their liking in a certain transaction? ",
+      "Sección": "Employee replacement"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a liability or Liquidated Damages clause? \nDetail its contents, incorporating maximum limits of liability, where appropriate.",
+      "Sección": "Matrix Responsibility "
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Are indirect and consequential damages excluded?",
+      "Sección": "Matrix Responsibility "
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a requirement for any of the parties to provide a corporate guarantee or any other financial guarantee?\nDetail, where appropriate, obligations and amounts covered.",
+      "Sección": "Corporate Guarantees"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there an insurance clause? \nDetail what insurance is required, amounts and if it is required to provide once a certified year. ",
+      "Sección": "Insurance "
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Has the content of the clause been reviewed by the Department of Insurance? ",
+      "Sección": "Insurance "
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a force majeure clause in the contract? \nDetail its content (notice period, duration and period to be able to terminate the contract, etc.).",
+      "Sección": "Force Majeure"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a Law Change clause? Detail, where appropriate, implications and who assumes the obligations arising from it.",
+      "Sección": "Change of Law"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Is there a hardship clause in the contract? Detail its contents. ",
+      "Sección": "Hardship"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "What is the Law applicable to the contract? ",
+      "Sección": "Applicable law; Courts or arbitration"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "In the event of discrepancy between the parties when applying the contract, which courts or arbitration are competent?",
+      "Sección": "Applicable law; Courts or arbitration"
+    },
+    {
+      "Respuesta": "Error al extraer texto del PDF: EOF marker not found",
+      "Riesgo": "Alto",
+      "Pregunta": "Detail the points of the amendments that is being reviewed that imply an improvement or a worsening with respect to the original contract or with respect to the previous addenda signed (if applicable). ",
+      "Sección": "In case of contract extension\n(Amendments)"
+    }
+  ],
+  "fecha_inicio": "2025-07-02 11:07:12",
+  "preguntas_originales": [
+    {
+      "Número de Pregunta": 1,
+      "Pregunta": "Is there a clause that allows the customer to terminate the contract early and/or with a certain notice?  ",
+      "Sección": "Early Termination / or \n\nTermination Clause",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 2,
+      "Pregunta": "Likewise, is there a clause that allows MAXAM to terminate the contract early and/or with a certain notice? \nDetail the implications of this (term, compensation, etc.).",
+      "Sección": "Early Termination / or \n\nTermination Clause",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 3,
+      "Pregunta": "Is there an exclusivity clause? Detail its content and implications.",
+      "Sección": "Exclusivity \n(if aplicable)",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 4,
+      "Pregunta": "Is there a purchase (or sale) clause of a minimum amount per year (or during the term of the contract)? \nDetail its content and communication procedure between the parties for this purpose. ",
+      "Sección": "Purchasing Products",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 5,
+      "Pregunta": "In the case of sale of products by MAXAM, is it established or deduced that the product sold has a certain origin of production (country/region)? ",
+      "Sección": "Purchasing Products",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 6,
+      "Pregunta": "Payment Term: ",
+      "Sección": "Payment Terms",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 7,
+      "Pregunta": "In the event of a delay or non-payment of an invoice, is there a duty of compensation to the other party? ",
+      "Sección": "Payment Terms",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 8,
+      "Pregunta": "What is the compensation percentage? ",
+      "Sección": "Payment Terms",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 9,
+      "Pregunta": "Does the contract have the option of offsetting invoices? In what cases?",
+      "Sección": "Payment Terms",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 10,
+      "Pregunta": "If during the term of the contract new services are developed or in greater quantity and proportion than those described, is there an option to modify the rates? ",
+      "Sección": "Rate",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 11,
+      "Pregunta": "Is there a clause to raise or lower rates (rise and fall) based on a certain index (for example, the nitrate index)? Has a cost-through been agreed? ",
+      "Sección": "Rise and Fall",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 12,
+      "Pregunta": "Does the contract include the possibility of suspending the service or even terminating early in the event of non-payment of invoices? Detail its content: notice period, notification, etc. ",
+      "Sección": "Suspension",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 13,
+      "Pregunta": "Does the customer pay all the taxes involved in the subject matter of the contract?",
+      "Sección": "Taxes",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 14,
+      "Pregunta": "When does the transfer of ownership of the products take place?",
+      "Sección": "Incoterms",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 15,
+      "Pregunta": "What is the Incoterm agreed by the parties?",
+      "Sección": "Incoterms",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 16,
+      "Pregunta": "Is there a subcontracting/assignment clause in the contract? \nDetail whether prior consent is required by the other party. ",
+      "Sección": "Subcontracting",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 17,
+      "Pregunta": "Is there a clause for termination of the contract or prior authorization by the counterparty in the event of a change of control of one of the parties? ",
+      "Sección": "Change of Control",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 18,
+      "Pregunta": "Is there a clause in the contract that allows the customer/MAXAM to request a change from those employees who are not to their liking in a certain transaction? ",
+      "Sección": "Employee replacement",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 19,
+      "Pregunta": "Is there a liability or Liquidated Damages clause? \nDetail its contents, incorporating maximum limits of liability, where appropriate.",
+      "Sección": "Matrix Responsibility ",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 20,
+      "Pregunta": "Are indirect and consequential damages excluded?",
+      "Sección": "Matrix Responsibility ",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 21,
+      "Pregunta": "Is there a requirement for any of the parties to provide a corporate guarantee or any other financial guarantee?\nDetail, where appropriate, obligations and amounts covered.",
+      "Sección": "Corporate Guarantees",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 22,
+      "Pregunta": "Is there an insurance clause? \nDetail what insurance is required, amounts and if it is required to provide once a certified year. ",
+      "Sección": "Insurance ",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 23,
+      "Pregunta": "Has the content of the clause been reviewed by the Department of Insurance? ",
+      "Sección": "Insurance ",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 24,
+      "Pregunta": "Is there a force majeure clause in the contract? \nDetail its content (notice period, duration and period to be able to terminate the contract, etc.).",
+      "Sección": "Force Majeure",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 25,
+      "Pregunta": "Is there a Law Change clause? Detail, where appropriate, implications and who assumes the obligations arising from it.",
+      "Sección": "Change of Law",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 26,
+      "Pregunta": "Is there a hardship clause in the contract? Detail its contents. ",
+      "Sección": "Hardship",
+      "Boolean": "Yes"
+    },
+    {
+      "Número de Pregunta": 27,
+      "Pregunta": "What is the Law applicable to the contract? ",
+      "Sección": "Applicable law; Courts or arbitration",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 28,
+      "Pregunta": "In the event of discrepancy between the parties when applying the contract, which courts or arbitration are competent?",
+      "Sección": "Applicable law; Courts or arbitration",
+      "Boolean": "No"
+    },
+    {
+      "Número de Pregunta": 29,
+      "Pregunta": "Detail the points of the amendments that is being reviewed that imply an improvement or a worsening with respect to the original contract or with respect to the previous addenda signed (if applicable). ",
+      "Sección": "In case of contract extension\n(Amendments)",
+      "Boolean": "No"
+    }
+  ],
+  "fecha_modificacion": "2025-07-02 11:07:12",
+  "num_resultados": 29,
+  "fecha_finalizacion": "2025-07-02 11:07:12"
+}

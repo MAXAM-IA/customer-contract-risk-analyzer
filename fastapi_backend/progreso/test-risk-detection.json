@@ -1,0 +1,40 @@
+{
+  "fecha_modificacion": "2025-01-02 15:30:00",
+  "preguntas_originales": [
+    {
+      "Pregunta": "¿Cuál es el riesgo principal?",
+      "Sección": "Riesgos"
+    },
+    {
+      "Pregunta": "¿Hay garantías?",
+      "Sección": "Garantías"
+    },
+    {
+      "Pregunta": "¿Cuáles son los términos?",
+      "Sección": "Términos"
+    }
+  ],
+  "resultados": [
+    {
+      "Pregunta": "¿Cuál es el riesgo principal?",
+      "Sección": "Riesgos",
+      "Respuesta": "El contrato presenta varios riesgos significativos...",
+      "Estado": "✅ Completado",
+      "RISK": "HIGH"
+    },
+    {
+      "Pregunta": "¿Hay garantías?",
+      "Sección": "Garantías",
+      "Respuesta": "Las garantías son limitadas pero aceptables...",
+      "Estado": "✅ Completado",
+      "Riesgo": "Medio"
+    },
+    {
+      "Pregunta": "¿Cuáles son los términos?",
+      "Sección": "Términos",
+      "Respuesta": "Los términos son favorables para la empresa...",
+      "Estado": "✅ Completado",
+      "risk": "low"
+    }
+  ]
+}
