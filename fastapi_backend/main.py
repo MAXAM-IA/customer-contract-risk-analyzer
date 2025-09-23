@@ -16,6 +16,10 @@ try:
 except ImportError:
     print("⚠️  python-dotenv no instalado, usando variables de entorno del sistema")
 
+# Añadir el directorio actual al path de Python
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from worker import (
     analizar_documento, 
     analizar_pregunta, 
