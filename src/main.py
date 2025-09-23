@@ -18,7 +18,7 @@ historico = st.Page("./pages/historico.py", title="Histórico", icon="📚")
 
 pg = st.navigation(
     {
-        "Agente": [chatbot],
+        #"Agente": [chatbot],
         "Análisis de Contratos": [inicio_analisis, dashboard, nuevo_analisis, procesos_en_curso, historico]
     }
 )

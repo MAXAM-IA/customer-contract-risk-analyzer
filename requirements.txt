@@ -19,3 +19,4 @@ httpx
 pandas
 openpyxl
 python-multipart
+PyPDF2

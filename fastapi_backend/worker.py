@@ -9,6 +9,7 @@ from langchain_core.output_parsers import StrOutputParser
 import base64
 import httpx
 import os
+from langchain_openai import AzureChatOpenAI
 
 # Cargar variables de entorno desde .env si existe
 try:
@@ -434,7 +435,7 @@ def analizar_pregunta_texto(pregunta, seccion, texto_contrato):
         
         LLM_MODEL = "gemini-2.5-flash-preview-05-20"
         logger.info(f"🤖 Inicializando modelo: {LLM_MODEL}")
-        
+        '''
         llm = ChatGoogleGenerativeAI(
             model=LLM_MODEL,
             temperature=0,
@@ -443,6 +444,22 @@ def analizar_pregunta_texto(pregunta, seccion, texto_contrato):
             http_client=httpx.Client(verify=False),
             google_api_key=api_key
         )
+        '''
+        azure_endpoint = str(os.getenv("APP_SERVICE_NLP_API_URL", "")).rstrip("/")
+        api_key = os.getenv("APP_SERVICE_NLP_API_KEY", "")
+
+        azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT", "")
+        api_key = os.getenv("AZURE_OPENAI_API_KEY", "")
+        azure_deployment = os.getenv("AZURE_DEPLOYMENT_NAME",)
+
+        llm = AzureChatOpenAI(
+            azure_endpoint=azure_endpoint,
+            api_key=api_key,
+            azure_deployment=azure_deployment,
+            api_version="2024-12-01-preview",
+            temperature=0
+            )
+
         logger.info(f"✅ Modelo inicializado correctamente")
 
         logger.info(f"📄 Preparando texto para análisis (longitud: {len(texto_contrato)} caracteres)")
