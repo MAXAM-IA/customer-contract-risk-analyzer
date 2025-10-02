@@ -27,7 +27,7 @@ def main(contrato_path, progreso_path, preguntas_path):
             "Número": numero,
             "Pregunta": pregunta,
             "Sección": seccion,
-            "Estado": "✅ Completado",
+            "Estado": "✅ Completed",
             "Respuesta": "",
             "Riesgo": ""
         }

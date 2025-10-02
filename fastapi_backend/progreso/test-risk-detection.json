@@ -19,21 +19,21 @@
       "Pregunta": "¿Cuál es el riesgo principal?",
       "Sección": "Riesgos",
       "Respuesta": "El contrato presenta varios riesgos significativos...",
-      "Estado": "✅ Completado",
+      "Estado": "✅ Completed",
       "RISK": "HIGH"
     },
     {
       "Pregunta": "¿Hay garantías?",
       "Sección": "Garantías",
       "Respuesta": "Las garantías son limitadas pero aceptables...",
-      "Estado": "✅ Completado",
+      "Estado": "✅ Completed",
       "Riesgo": "Medio"
     },
     {
       "Pregunta": "¿Cuáles son los términos?",
       "Sección": "Términos",
       "Respuesta": "Los términos son favorables para la empresa...",
-      "Estado": "✅ Completado",
+      "Estado": "✅ Completed",
       "risk": "low"
     }
   ]

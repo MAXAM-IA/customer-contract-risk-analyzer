@@ -40,7 +40,7 @@ def actualizar_estado_analisis(id, estado):
 def obtener_analisis_pendientes():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT id, filename, estado FROM analisis WHERE estado != '✅ Completado' OR estado IS NULL ORDER BY created_at DESC")
+    c.execute("SELECT id, filename, estado FROM analisis WHERE estado != '✅ Completed' OR estado IS NULL ORDER BY created_at DESC")
     rows = c.fetchall()
     conn.close()
     return rows

@@ -5,27 +5,27 @@ from pathlib import Path
 from db.analisis_db import obtener_analisis_pendientes
 
 def obtener_estadisticas_dashboard():
-    """Obtiene estadísticas para el dashboard principal"""
+    """Fetch statistics for the main dashboard."""
     try:
         conn = sqlite3.connect(Path(__file__).parent.parent.parent / "analisis.db")
         c = conn.cursor()
         
-        # Total de análisis
+        # Total analyses
         c.execute("SELECT COUNT(*) FROM analisis")
         total = c.fetchone()[0]
         
-        # Análisis completados
-        c.execute("SELECT COUNT(*) FROM analisis WHERE estado = '✅ Completado'")
+        # Completed analyses
+        c.execute("SELECT COUNT(*) FROM analisis WHERE estado = '✅ Completed'")
         completados = c.fetchone()[0]
         
-        # Análisis en progreso
+        # Analyses in progress
         pendientes = obtener_analisis_pendientes()
         en_progreso = len(pendientes)
         
-        # Último análisis
+        # Most recent analysis
         c.execute("SELECT filename, created_at FROM analisis ORDER BY created_at DESC LIMIT 1")
         ultimo = c.fetchone()
-        ultimo_archivo = ultimo[0] if ultimo else "Ninguno"
+        ultimo_archivo = ultimo[0] if ultimo else "None"
         ultimo_fecha = ultimo[1] if ultimo else ""
         
         conn.close()
@@ -48,17 +48,18 @@ def obtener_estadisticas_dashboard():
 
 @st.fragment
 def mostrar_dashboard_ejecutivo():
-    # Obtener estadísticas actualizadas
+    """Render the executive dashboard fragment."""
+    # Pull latest statistics
     stats = obtener_estadisticas_dashboard()
     
-    # Inicializar timestamp del dashboard si no existe
+    # Initialise dashboard refresh timestamp when missing
     if 'dashboard_last_refresh' not in st.session_state:
         st.session_state.dashboard_last_refresh = time.time()
     
-    # Header del dashboard con diseño mejorado
+    # Dashboard header with styling
     ultima_actualizacion = time.strftime("%H:%M:%S", time.localtime(st.session_state.dashboard_last_refresh))
     
-    # Header unificado con botón integrado
+    # Unified header with built-in action button
     st.markdown(f"""
         <div style='
             background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
@@ -81,26 +82,26 @@ def mostrar_dashboard_ejecutivo():
                     gap: 0.5rem;
                 '>
                     <span style='font-size: 1.2rem;'>📊</span>
-                    Dashboard Ejecutivo
+                    Executive Dashboard
                 </h2>
                 <p style='
                     color: #94a3b8;
                     margin: 0.2rem 0 0 0;
                     font-size: 0.75rem;
-                '>Última actualización: {ultima_actualizacion}</p>
+                '>Last refresh: {ultima_actualizacion}</p>
             </div>
         </div>
     """, unsafe_allow_html=True)
     
-    # Botón de refrescar separado y bien posicionado
+    # Refresh button alignment
     col_spacer, col_button = st.columns([5, 1])
     with col_button:
-        if st.button("🔄 Actualizar", help="Actualizar dashboard", key="refresh_dashboard_compact", type="primary"):
+        if st.button("🔄 Refresh", help="Refresh dashboard", key="refresh_dashboard_compact", type="primary"):
             st.session_state.dashboard_last_refresh = time.time()
-            st.toast("✅ Dashboard actualizado", icon="🔄")
+            st.toast("✅ Dashboard refreshed", icon="🔄")
             st.rerun(scope="fragment")
 
-    # Tarjetas de métricas con diseño mejorado y alineación corregida
+    # Metric cards
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
@@ -135,13 +136,13 @@ def mostrar_dashboard_ejecutivo():
                     font-size: 0.75rem; 
                     opacity: 0.9;
                     line-height: 1;
-                '>Total Análisis</p>
+                '>Total Analyses</p>
             </div>
         """, unsafe_allow_html=True)
 
     with col2:
         # Calcular porcentaje de completados
-        porcentaje_completados = round(100 * stats['completados'] / max(1, stats['total']), 1)
+        percent_completed = round(100 * stats['completados'] / max(1, stats['total']), 1)
         st.markdown(f"""
             <div style='
                 background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
@@ -173,7 +174,7 @@ def mostrar_dashboard_ejecutivo():
                     font-size: 0.75rem; 
                     opacity: 0.9;
                     line-height: 1;
-                '>Completados ({porcentaje_completados}%)</p>
+                '>Completed ({percent_completed}%)</p>
             </div>
         """, unsafe_allow_html=True)
 
@@ -209,19 +210,19 @@ def mostrar_dashboard_ejecutivo():
                     font-size: 0.75rem; 
                     opacity: 0.9;
                     line-height: 1;
-                '>En Progreso</p>
+                '>In Progress</p>
             </div>
         """, unsafe_allow_html=True)
 
     with col4:
-        # Caja de eficiencia (porcentaje de éxito)
-        tasa_exito = round(100 * stats['completados'] / max(1, stats['total']), 0) if stats['total'] > 0 else 100
-        color_tasa = "#16a34a" if tasa_exito >= 90 else "#f59e0b" if tasa_exito >= 70 else "#dc2626"
-        color_tasa_dark = "#15803d" if tasa_exito >= 90 else "#d97706" if tasa_exito >= 70 else "#b91c1c"
+        # Success rate card
+        success_rate = round(100 * stats['completados'] / max(1, stats['total']), 0) if stats['total'] > 0 else 100
+        success_color = "#16a34a" if success_rate >= 90 else "#f59e0b" if success_rate >= 70 else "#dc2626"
+        success_color_dark = "#15803d" if success_rate >= 90 else "#d97706" if success_rate >= 70 else "#b91c1c"
         
         st.markdown(f"""
             <div style='
-                background: linear-gradient(135deg, {color_tasa} 0%, {color_tasa_dark} 100%);
+                background: linear-gradient(135deg, {success_color} 0%, {success_color_dark} 100%);
                 color: white;
                 padding: 1rem;
                 border-radius: 8px;
@@ -244,18 +245,18 @@ def mostrar_dashboard_ejecutivo():
                     font-size: 1.6rem; 
                     font-weight: 700;
                     line-height: 1;
-                '>{tasa_exito:.0f}%</h3>
+                '>{success_rate:.0f}%</h3>
                 <p style='
                     margin: 0.3rem 0 0 0; 
                     font-size: 0.75rem; 
                     opacity: 0.9;
                     line-height: 1;
-                '>Tasa de Éxito</p>
+                '>Success Rate</p>
             </div>
         """, unsafe_allow_html=True)
 
-    # Información del último análisis compacta con mejor diseño
-    if stats['ultimo_archivo'] != "Ninguno":
+    # Compact latest analysis card
+    if stats['ultimo_archivo'] != "None":
         # Formatear fecha si existe
         fecha_display = ""
         if stats['ultimo_fecha']:
@@ -302,7 +303,7 @@ def mostrar_dashboard_ejecutivo():
                                 color: #0f172a;
                                 font-size: 0.85rem;
                                 font-weight: 600;
-                            '>Último Análisis Completado</h4>
+                            '>Latest Completed Analysis</h4>
                             <div style='
                                 background: #dcfce7;
                                 color: #16a34a;
@@ -350,7 +351,7 @@ def mostrar_dashboard_ejecutivo():
                     font-size: 0.85rem;
                     font-weight: 500;
                 '>
-                    No hay análisis registrados aún
+                    No analyses recorded yet
                 </div>
             </div>
         """, unsafe_allow_html=True)
@@ -360,7 +361,7 @@ def mostrar_dashboard():
     # Llamar al fragment del dashboard ejecutivo
     mostrar_dashboard_ejecutivo()
     
-    # Panel informativo compacto y moderno con mejor alineación
+    # Informational panel
     st.markdown("""
         <div style='
             background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
@@ -390,7 +391,7 @@ def mostrar_dashboard():
                     margin: 0;
                     font-size: 0.85rem;
                     font-weight: 600;
-                '>Vista Ejecutiva</h4>
+                '>Executive View</h4>
                 <div style='
                     background: rgba(59,130,246,0.15);
                     color: #1e40af;
@@ -398,7 +399,7 @@ def mostrar_dashboard():
                     border-radius: 12px;
                     font-size: 0.65rem;
                     font-weight: 600;
-                '>Tiempo Real</div>
+                '>Real Time</div>
             </div>
             <p style='
                 color: #1e40af;
@@ -406,6 +407,6 @@ def mostrar_dashboard():
                 margin-left: 2.2rem;
                 font-size: 0.75rem;
                 line-height: 1.5;
-            '>Métricas actualizadas automáticamente. Usa el botón 🔄 para forzar actualización.</p>
+            '>Metrics update automatically. Use the 🔄 button to refresh on demand.</p>
         </div>
     """, unsafe_allow_html=True)

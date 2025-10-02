@@ -19,7 +19,8 @@ import re
 def obtener_analisis_completados_backend():
     """Obtiene análisis completados desde el backend FastAPI"""
     try:
-        response = requests.get("http://localhost:8000/procesos", timeout=10)
+        # Timeout bajo para evitar bloquear la UI si el backend no responde
+        response = requests.get("http://localhost:8000/procesos", timeout=1)
         if response.status_code == 200:
             procesos = response.json()
             # Filtrar solo análisis completados
@@ -35,6 +36,21 @@ def obtener_analisis_completados_backend():
         st.error(f"Error de conexión con el backend: {e}")
         return []
 
+
+def _obtener_nombre_desde_db(analisis_id: str) -> str:
+    db_path = Path(__file__).parent.parent.parent / "analisis.db"
+    try:
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()
+        c.execute("SELECT filename FROM analisis WHERE id=?", (analisis_id,))
+        row = c.fetchone()
+        conn.close()
+        if row and row[0]:
+            return row[0]
+    except Exception:
+        return f"Análisis_{analisis_id[:8]}"
+    return f"Análisis_{analisis_id[:8]}"
+
 def obtener_analisis_completados(filtro_nombre="", fecha_desde=None, fecha_hasta=None):
     """Obtiene análisis completados con filtros opcionales - PRIMERO INTENTA BACKEND"""
     # Intentar obtener desde el backend primero
@@ -45,16 +61,18 @@ def obtener_analisis_completados(filtro_nombre="", fecha_desde=None, fecha_hasta
         for proceso in analisis_backend:
             # Extraer información relevante
             id_analisis = proceso.get("id", "")
-            filename = f"Análisis_{id_analisis[:8]}.pdf"  # Nombre genérico
+            nombre_analisis = proceso.get("nombre_analisis")
+            if not nombre_analisis:
+                nombre_analisis = _obtener_nombre_desde_db(id_analisis)
             created_at = proceso.get("fecha_modificacion", "")
-            resultados.append((id_analisis, filename, created_at))
+            resultados.append((id_analisis, nombre_analisis, created_at))
         return resultados
     
     # Fallback a SQLite si el backend no está disponible
     conn = sqlite3.connect(Path(__file__).parent.parent.parent / "analisis.db")
     c = conn.cursor()
     
-    query = "SELECT id, filename, created_at FROM analisis WHERE estado = '✅ Completado'"
+    query = "SELECT id, filename, created_at FROM analisis WHERE estado = '✅ Completed'"
     params = []
     
     if filtro_nombre:
@@ -72,10 +90,54 @@ def obtener_analisis_completados(filtro_nombre="", fecha_desde=None, fecha_hasta
     query += " ORDER BY created_at DESC"
     
     c.execute(query, params)
-    resultados = c.fetchall()
+    filas = c.fetchall()
     conn.close()
-    
+
+    resultados = []
+    for analisis_id, filename, created_at in filas:
+        nombre_json = None
+        try:
+            with open(_progreso_path(analisis_id), "r", encoding="utf-8") as f:
+                progreso = json.load(f)
+            nombre_json = progreso.get("nombre_analisis")
+        except Exception:
+            nombre_json = None
+
+        nombre = nombre_json or filename or f"Análisis_{analisis_id[:8]}"
+        resultados.append((analisis_id, nombre, created_at))
+
     return resultados
+
+# =============================
+# Cachés ligeras para progreso/Word
+# =============================
+
+def _progreso_path(analisis_id: str) -> Path:
+    return Path(__file__).parent.parent.parent.parent / "fastapi_backend" / "progreso" / f"{analisis_id}.json"
+
+def _progreso_mtime(analisis_id: str) -> float:
+    try:
+        return os.path.getmtime(_progreso_path(analisis_id))
+    except Exception:
+        return 0.0
+
+@st.cache_data(show_spinner=False)
+def _leer_progreso_cached(analisis_id: str, mtime: float):
+    p = _progreso_path(analisis_id)
+    if not p.exists():
+        return None
+    with open(p, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+@st.cache_data(show_spinner=False)
+def _generar_word_cached(analisis_id: str, filename: str, mtime: float):
+    """Genera el Word y lo cachea por ID + timestamp del archivo de progreso."""
+    progreso_data = _leer_progreso_cached(analisis_id, mtime)
+    if not progreso_data:
+        return None
+    preguntas = progreso_data.get('preguntas_originales') or progreso_data.get('resultados', [])
+    resultados = progreso_data.get('resultados', [])
+    return generar_documento_word_corporativo(progreso_data, preguntas, resultados, filename)
 
 def exportar_historico_csv():
     """Exporta el histórico completo a CSV"""
@@ -100,7 +162,7 @@ def mostrar_detalle_dialog(analisis_id, filename):
     progreso_path = Path(__file__).parent.parent.parent.parent / "fastapi_backend" / "progreso" / f"{analisis_id}.json"
     
     # Cabecera del modal más compacta con botón de refrescar
-    col_header1, col_header2, col_header3 = st.columns([3, 1, 1], vertical_alignment="center", border=False)
+    col_header1, col_header2 = st.columns([3, 1], vertical_alignment="center", border=False)
     
     with col_header1:
         st.markdown(f"""
@@ -135,16 +197,6 @@ def mostrar_detalle_dialog(analisis_id, filename):
             if f'progreso_data_{analisis_id}' in st.session_state:
                 del st.session_state[f'progreso_data_{analisis_id}']
             st.rerun()
-    
-    with col_header3:
-        if st.button("🔍 Auto-Reload", help="Activar recarga automática", use_container_width=True, type="secondary"):
-            # Activar auto-reload cada 5 segundos
-            st.session_state[f'auto_reload_{analisis_id}'] = not st.session_state.get(f'auto_reload_{analisis_id}', False)
-            if st.session_state[f'auto_reload_{analisis_id}']:
-                st.success("🔄 Auto-reload activado")
-                st.rerun()
-            else:
-                st.info("⏸️ Auto-reload desactivado")
     
     if progreso_path.exists():
         try:
@@ -230,7 +282,7 @@ def mostrar_detalle_dialog(analisis_id, filename):
             
             # Resumen ejecutivo compacto
             total_preguntas = len(preguntas)
-            completadas = sum(1 for r in resultados if r.get('Estado') == '✅ Completado')
+            completadas = sum(1 for r in resultados if r.get('Estado') == '✅ Completed')
             
             # Estadísticas de riesgo - versión mejorada y consistente
             riesgos = {'Alto': 0, 'Medio': 0, 'Bajo': 0, 'Sin evaluar': 0}
@@ -580,13 +632,13 @@ def mostrar_detalle_dialog(analisis_id, filename):
                         
                         with col_btn1:
                             # Mostrar estado del botón para debugging
-                            st.write(f"🔧 Debug: ID={analisis_id[:8]}, idx={idx}")
+                            #st.write(f"🔧 Debug: ID={analisis_id[:8]}, idx={idx}")
                             
                             # Mostrar timestamp del archivo para verificar actualizaciones
                             if progreso_path.exists():
                                 file_mtime = os.path.getmtime(progreso_path)
                                 file_time = datetime.fromtimestamp(file_mtime).strftime("%H:%M:%S")
-                                st.write(f"📁 Archivo actualizado: {file_time}")
+                                #st.write(f"📁 Archivo actualizado: {file_time}")
                             
                             if st.button(
                                 "🔄 Re-analizar Pregunta", 
@@ -598,9 +650,9 @@ def mostrar_detalle_dialog(analisis_id, filename):
                                 # Re-análisis asíncrono - enviar al backend y mostrar en procesos en curso
                                 from db.analisis_db import guardar_analisis
                                 
-                                st.write("🚀 ¡Botón presionado! Iniciando re-análisis...")
-                                st.write(f"📝 Pregunta original: {pregunta[:50]}...")
-                                st.write(f"📝 Pregunta editada: {nueva_pregunta[:50]}...")
+                                #st.write("🚀 ¡Botón presionado! Iniciando re-análisis...")
+                                #st.write(f"📝 Pregunta original: {pregunta[:50]}...")
+                                #st.write(f"📝 Pregunta editada: {nueva_pregunta[:50]}...")
                                 
                                 try:
                                     API_URL = "http://localhost:8000"  # Ajustar según tu configuración
@@ -609,7 +661,7 @@ def mostrar_detalle_dialog(analisis_id, filename):
                                         "seccion": nueva_seccion     # Usar la sección editada
                                     }
                                     
-                                    st.write(f"📤 Enviando: {payload}")
+                                    #st.write(f"📤 Enviando: {payload}")
                                     
                                     # PRIMERO: Registrar en BD como proceso pendiente
                                     filename_proceso = f"Reanalisis_P{idx+1}_{filename[:20]}..."
@@ -618,7 +670,7 @@ def mostrar_detalle_dialog(analisis_id, filename):
                                         filename=filename_proceso,
                                         estado="🔄 Reprocesando"
                                     )
-                                    st.write(f"✅ Proceso registrado en BD como: {filename_proceso}")
+                                    #st.write(f"✅ Proceso registrado en BD como: {filename_proceso}")
                                     
                                     # SEGUNDO: Enviar al backend
                                     with st.spinner("Enviando re-análisis al backend..."):
@@ -628,22 +680,23 @@ def mostrar_detalle_dialog(analisis_id, filename):
                                             timeout=10  # Timeout corto para envío
                                         )
                                     
-                                    st.write(f"📥 Respuesta del servidor: {response.status_code}")
+                                    #st.write(f"📥 Respuesta del servidor: {response.status_code}")
                                     
                                     if response.status_code == 200:
                                         result = response.json()
                                         proceso_id = result.get("id")
                                         mensaje = result.get("mensaje", "Re-análisis iniciado")
-                                        
-                                        st.success(f"✅ {mensaje}")
-                                        st.success(f"📝 Usando pregunta editada: '{nueva_pregunta[:50]}...'")
+                                        st.toast(f"Re-analizando pregunta", icon="🔄")
+                                        #st.success(f"✅ {mensaje}")
+                                        #st.success(f"📝 Usando pregunta editada: '{nueva_pregunta[:50]}...'")
                                         
                                         # Verificar si es el mismo ID (sobreescribiendo) o un nuevo ID
                                         if proceso_id == analisis_id:
-                                            st.info(f"🔄 Re-analizando pregunta #{idx+1} en el análisis actual: {analisis_id[:8]}...")
-                                            st.info("📝 El resultado se actualizará en este mismo análisis.")
+                                            pass
+                                            #st.info(f"🔄 Re-analizando pregunta #{idx+1} en el análisis actual: {analisis_id[:8]}...")
+                                            #st.info("📝 El resultado se actualizará en este mismo análisis.")
                                         else:
-                                            st.info(f"🆔 Nuevo proceso creado: {proceso_id[:8]}...")
+                                            #st.info(f"🆔 Nuevo proceso creado: {proceso_id[:8]}...")
                                             # Si es un nuevo ID, también registrarlo
                                             if proceso_id != analisis_id:
                                                 guardar_analisis(
@@ -652,9 +705,10 @@ def mostrar_detalle_dialog(analisis_id, filename):
                                                     estado="🔄 Reprocesando"
                                                 )
                                         
-                                        st.info("🔄 El proceso aparecerá en 'Procesos en Curso'. Los resultados se actualizarán automáticamente.")
+                                        #st.info("🔄 El proceso aparecerá en 'Procesos en Curso'. Los resultados se actualizarán automáticamente.")
                                         
                                         # Mostrar enlace directo a procesos en curso
+                                        '''
                                         st.markdown("""
                                             <div style='
                                                 background: #ecfdf5;
@@ -669,40 +723,31 @@ def mostrar_detalle_dialog(analisis_id, filename):
                                                 </p>
                                             </div>
                                         """, unsafe_allow_html=True)
-                                        
-                                        # Botón para ir a procesos en curso
-                                        if st.button("👀 Ver en Procesos en Curso", type="secondary", use_container_width=True):
-                                            st.switch_page("pages/procesos_en_curso.py")
-                                        
-                                        # Botón para cerrar y reabrir el diálogo con datos frescos
-                                        if st.button("🔄 Cerrar y Reabrir Diálogo", type="secondary", use_container_width=True):
-                                            # Limpiar cualquier cache del diálogo
-                                            if f'progreso_data_{analisis_id}' in st.session_state:
-                                                del st.session_state[f'progreso_data_{analisis_id}']
-                                            st.rerun()
+                                        '''
+            
                                             
                                     else:
                                         st.error(f"❌ Error: {response.status_code} - {response.text}")
                                         # Si falla, revertir el estado en BD
                                         from db.analisis_db import actualizar_estado_analisis
-                                        actualizar_estado_analisis(analisis_id, "✅ Completado")
+                                        actualizar_estado_analisis(analisis_id, "✅ Completed")
                                         
                                 except requests.exceptions.ConnectionError:
                                     st.error("❌ No se puede conectar al backend. ¿Está ejecutándose?")
                                     # Revertir estado en BD
                                     from db.analisis_db import actualizar_estado_analisis
-                                    actualizar_estado_analisis(analisis_id, "✅ Completado")
+                                    actualizar_estado_analisis(analisis_id, "✅ Completed")
                                 except requests.exceptions.Timeout:
                                     st.error("❌ Timeout al enviar la solicitud. El backend puede estar ocupado.")
                                     # Revertir estado en BD
                                     from db.analisis_db import actualizar_estado_analisis
-                                    actualizar_estado_analisis(analisis_id, "✅ Completado")
+                                    actualizar_estado_analisis(analisis_id, "✅ Completed")
                                 except Exception as e:
                                     st.error(f"❌ Error inesperado: {str(e)}")
                                     st.write(f"🔍 Detalles del error: {type(e).__name__}: {str(e)}")
                                     # Revertir estado en BD
                                     from db.analisis_db import actualizar_estado_analisis
-                                    actualizar_estado_analisis(analisis_id, "✅ Completado")
+                                    actualizar_estado_analisis(analisis_id, "✅ Completed")
                         
                         with col_btn2:
                             if st.button(
@@ -932,7 +977,7 @@ def mostrar_historico():
             c = conn.cursor()
             
             # Estadísticas básicas
-            c.execute("SELECT COUNT(*) FROM analisis WHERE estado = '✅ Completado'")
+            c.execute("SELECT COUNT(*) FROM analisis WHERE estado = '✅ Completed'")
             total_completados = c.fetchone()[0]
             
             c.execute("SELECT COUNT(*) FROM analisis WHERE date(created_at) = date('now')")
@@ -981,28 +1026,80 @@ def mostrar_historico():
     
     st.markdown("<div style='margin: 1rem 0;'></div>", unsafe_allow_html=True)
     
-    # Obtener y mostrar resultados
-    resultados = obtener_analisis_completados(
-        filtro_nombre=filtro_nombre if filtro_nombre else "",
-        fecha_desde=fecha_desde if 'fecha_desde' in locals() else None,
-        fecha_hasta=fecha_hasta if 'fecha_hasta' in locals() else None
-    )
-    
-    if resultados:
+    # Configurar paginación
+    items_por_pagina = 10
+    if 'pagina_actual_historico' not in st.session_state:
+        st.session_state.pagina_actual_historico = 1
+
+    # Intentar backend primero (mantenemos comportamiento: sin filtros en backend)
+    resultados_backend = obtener_analisis_completados_backend()
+
+    resultados_pagina = []
+    total_items = 0
+
+    if resultados_backend:
+        resultados_full = []
+        for proceso in resultados_backend:
+            id_analisis = proceso.get("id", "")
+            filename = proceso.get("nombre_analisis") or proceso.get("filename")
+            if not filename:
+                filename = _obtener_nombre_desde_db(id_analisis)
+            created_at = proceso.get("fecha_modificacion", "")
+            resultados_full.append((id_analisis, filename, created_at))
+
+        total_items = len(resultados_full)
+        total_paginas = (total_items - 1) // items_por_pagina + 1 if total_items > 0 else 1
+        if st.session_state.pagina_actual_historico > total_paginas:
+            st.session_state.pagina_actual_historico = total_paginas
+        if st.session_state.pagina_actual_historico < 1:
+            st.session_state.pagina_actual_historico = 1
+        inicio = (st.session_state.pagina_actual_historico - 1) * items_por_pagina
+        fin = inicio + items_por_pagina
+        resultados_pagina = resultados_full[inicio:fin]
+    else:
+        # Paginación en SQLite
+        conn = sqlite3.connect(Path(__file__).parent.parent.parent / "analisis.db")
+        c = conn.cursor()
+        base_where = "WHERE estado = '✅ Completed'"
+        params = []
+        if filtro_nombre:
+            base_where += " AND filename LIKE ?"
+            params.append(f"%{filtro_nombre}%")
+        if 'fecha_desde' in locals() and fecha_desde:
+            base_where += " AND date(created_at) >= ?"
+            params.append(fecha_desde.strftime("%Y-%m-%d"))
+        if 'fecha_hasta' in locals() and fecha_hasta:
+            base_where += " AND date(created_at) <= ?"
+            params.append(fecha_hasta.strftime("%Y-%m-%d"))
+
+        c.execute(f"SELECT COUNT(*) FROM analisis {base_where}", params)
+        total_items = c.fetchone()[0]
+        total_paginas = (total_items - 1) // items_por_pagina + 1 if total_items > 0 else 1
+        if st.session_state.pagina_actual_historico > total_paginas:
+            st.session_state.pagina_actual_historico = total_paginas
+        if st.session_state.pagina_actual_historico < 1:
+            st.session_state.pagina_actual_historico = 1
+
+        offset = (st.session_state.pagina_actual_historico - 1) * items_por_pagina
+        query = f"""
+            SELECT id, filename, created_at
+            FROM analisis
+            {base_where}
+            ORDER BY created_at DESC
+            LIMIT ? OFFSET ?
+        """
+        c.execute(query, params + [items_por_pagina, offset])
+        resultados_pagina = c.fetchall()
+        conn.close()
+
+    if total_items > 0:
         st.markdown(f"""
             <h3 style='
                 color: #374151;
                 margin-bottom: 1rem;
                 font-size: 1.1rem;
-            '>📋 Resultados ({len(resultados)} análisis encontrados)</h3>
+            '>📋 Resultados ({total_items} análisis encontrados)</h3>
         """, unsafe_allow_html=True)
-        
-        # Paginación
-        items_por_pagina = 10
-        total_paginas = (len(resultados) - 1) // items_por_pagina + 1
-        
-        if 'pagina_actual_historico' not in st.session_state:
-            st.session_state.pagina_actual_historico = 1
         
         # Paginación superior discreta
         if total_paginas > 1:
@@ -1020,7 +1117,7 @@ def mostrar_historico():
                     color: #64748b;
                 '>
                     <span>📄 Página {st.session_state.pagina_actual_historico} de {total_paginas}</span>
-                    <span>📊 {len(resultados)} análisis total</span>
+                    <span>📊 {total_items} análisis total</span>
                 </div>
             """, unsafe_allow_html=True)
             
@@ -1062,9 +1159,7 @@ def mostrar_historico():
                     st.rerun()
         
         # Mostrar elementos de la página actual
-        inicio = (st.session_state.pagina_actual_historico - 1) * items_por_pagina
-        fin = inicio + items_por_pagina
-        items_pagina = resultados[inicio:fin]
+        items_pagina = resultados_pagina
         
         # Lista de análisis
         for analisis_id, filename, created_at in items_pagina:
@@ -1143,21 +1238,13 @@ def mostrar_historico():
                         mostrar_detalle_dialog(analisis_id, filename)
                 
                 with col_action2:
-                    # Verificar si existe el archivo de progreso
-                    progreso_path = Path(__file__).parent.parent.parent.parent / "fastapi_backend" / "progreso" / f"{analisis_id}.json"
+                    # Verificar si existe el archivo de progreso y usar caché para generar Word
+                    progreso_path = _progreso_path(analisis_id)
                     if progreso_path.exists():
                         try:
-                            with open(progreso_path, "r", encoding="utf-8") as f:
-                                progreso_data = json.load(f)
-                            
-                            preguntas = progreso_data.get('preguntas_originales') or progreso_data.get('resultados', [])
-                            resultados = progreso_data.get('resultados', [])
-                            
-                            # Generar documento Word directamente
-                            word_data = generar_documento_word_corporativo(progreso_data, preguntas, resultados, filename)
-                            
+                            mtime = os.path.getmtime(progreso_path)
+                            word_data = _generar_word_cached(analisis_id, filename, mtime)
                             if word_data:
-                                # Botón de descarga directa
                                 st.download_button(
                                     label="📄 Word MAXAM",
                                     data=word_data,
@@ -1169,19 +1256,18 @@ def mostrar_historico():
                                     type="primary"
                                 )
                             else:
-                                st.button("📄 Error Word", disabled=True, 
-                                        key=f"error_word_hist_{analisis_id}",
-                                        use_container_width=True,
-                                        help="Error al generar documento Word")
+                                st.button("📄 No disponible", disabled=True, 
+                                          key=f"no_data_hist_{analisis_id}",
+                                          use_container_width=True)
                         except Exception as e:
                             st.button("📄 Error", disabled=True, 
-                                    key=f"error_hist_{analisis_id}",
-                                    use_container_width=True,
-                                    help=f"Error: {str(e)}")
+                                      key=f"error_hist_{analisis_id}",
+                                      use_container_width=True,
+                                      help=f"Error: {str(e)}")
                     else:
                         st.button("📄 No disponible", disabled=True, 
-                                key=f"no_download_hist_{analisis_id}",
-                                use_container_width=True)
+                                  key=f"no_download_hist_{analisis_id}",
+                                  use_container_width=True)
                 
                 with col_action3:
                     if st.button("🔄 Re-análisis", key=f"reanalize_hist_{analisis_id}", 
@@ -1208,7 +1294,7 @@ def mostrar_historico():
                     color: #64748b;
                 '>
                     <span>📄 Página {st.session_state.pagina_actual_historico} de {total_paginas}</span>
-                    <span>📊 Mostrando {len(items_pagina)} de {len(resultados)} análisis</span>
+                    <span>📊 Mostrando {len(items_pagina)} de {total_items} análisis</span>
                 </div>
             """, unsafe_allow_html=True)
             
@@ -1581,7 +1667,7 @@ def exportar_historico_word():
         doc.add_heading('RESUMEN', level=2)
         
         total_analisis = len(analisis_list)
-        completados = sum(1 for a in analisis_list if a[2] == "✅ Completado")
+        completados = sum(1 for a in analisis_list if a[2] == "✅ Completed")
         en_proceso = sum(1 for a in analisis_list if "🔄" in a[2])
         errores = sum(1 for a in analisis_list if "❌" in a[2])
         

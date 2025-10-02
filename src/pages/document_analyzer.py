@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 from pathlib import Path
 from db.analisis_db import init_db, guardar_analisis, actualizar_estado_analisis, obtener_analisis_pendientes
+from datetime import datetime
 import sqlite3
 import json
 import time
@@ -56,7 +57,7 @@ def mostrar_detalle_dialog(analisis_id, filename):
     if progreso_json:
         preguntas = progreso_json.get('preguntas_originales') or progreso_json.get('resultados', [])
         resultados = progreso_json.get('resultados', [])
-        num_completadas = sum(1 for r in resultados if r.get('Estado') == '✅ Completado')
+        num_completadas = sum(1 for r in resultados if r.get('Estado') == '✅ Completed')
         total = len(preguntas)
         progreso_pct = int(100 * num_completadas / max(1, total))
         
@@ -633,7 +634,7 @@ def obtener_estadisticas_dashboard():
         total = c.fetchone()[0]
         
         # Análisis completados
-        c.execute("SELECT COUNT(*) FROM analisis WHERE estado = '✅ Completado'")
+        c.execute("SELECT COUNT(*) FROM analisis WHERE estado = '✅ Completed'")
         completados = c.fetchone()[0]
         
         # Análisis en progreso
@@ -1139,67 +1140,118 @@ with col_izq:
     if 'file_uploader_key' not in st.session_state:
         st.session_state.file_uploader_key = 0
     
-    uploaded_file = st.file_uploader(
-        "Selecciona un archivo",
+    uploaded_files = st.file_uploader(
+        "Selecciona archivos",
         type=["pdf", "docx", "txt"],
         help="Formatos soportados: PDF, Word (DOCX), Texto plano (TXT)",
         label_visibility="collapsed",
-        key=f"file_uploader_{st.session_state.file_uploader_key}"
+        key=f"file_uploader_{st.session_state.file_uploader_key}",
+        accept_multiple_files=True,
     )
     
-    if uploaded_file:
-        # Información del archivo seleccionado
-        st.markdown(f"""
-            <div style="
-                background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-                border: 1px solid #bbf7d0;
-                border-left: 4px solid #16a34a;
-                padding: 1rem;
-                border-radius: 8px;
-                margin: 1rem 0;
-            ">
+    if uploaded_files:
+        if not isinstance(uploaded_files, list):
+            files_to_process = [uploaded_files]
+        else:
+            files_to_process = uploaded_files
+
+        processed_files = []
+
+        for idx, uploaded_file in enumerate(files_to_process, start=1):
+            file_bytes = uploaded_file.getvalue()
+            file_size = len(file_bytes) / 1024
+            mime_type = uploaded_file.type or "application/octet-stream"
+
+            processed_files.append({
+                "name": uploaded_file.name,
+                "bytes": file_bytes,
+                "size_kb": file_size,
+                "mime": mime_type,
+            })
+
+            st.markdown(f"""
                 <div style="
-                    display: flex;
-                    align-items: center;
-                    gap: 0.75rem;
+                    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+                    border: 1px solid #bbf7d0;
+                    border-left: 4px solid #16a34a;
+                    padding: 1rem;
+                    border-radius: 8px;
+                    margin: 1rem 0;
                 ">
                     <div style="
-                        background: #16a34a;
-                        color: white;
-                        padding: 0.5rem;
-                        border-radius: 6px;
-                        font-size: 1rem;
-                    ">✅</div>
-                    <div>
-                        <p style="color: #166534; margin: 0; font-weight: 600; font-size: 0.95rem;">
-                            Archivo seleccionado
-                        </p>
-                        <p style="color: #059669; margin: 0.25rem 0 0 0; font-size: 0.85rem;">
-                            {uploaded_file.name}
-                        </p>
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                    ">
+                        <div style="
+                            background: #16a34a;
+                            color: white;
+                            padding: 0.5rem;
+                            border-radius: 6px;
+                            font-size: 1rem;
+                        ">✅</div>
+                        <div>
+                            <p style="color: #166534; margin: 0; font-weight: 600; font-size: 0.95rem;">
+                                Archivo #{idx}
+                            </p>
+                            <p style="color: #059669; margin: 0.25rem 0 0 0; font-size: 0.85rem;">
+                                {uploaded_file.name}
+                            </p>
+                            <p style="color: #047857; margin: 0.15rem 0 0 0; font-size: 0.75rem;">
+                                {file_size:.1f} KB · {mime_type}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        # Botón de análisis prominente
-        if st.button("🚀 Iniciar Análisis", use_container_width=True, type="primary"):
-            with st.spinner("Procesando archivo..."):
+            """, unsafe_allow_html=True)
+
+        nombres_archivos = [file_info["name"] for file_info in processed_files]
+        default_name = _generar_nombre_default(nombres_archivos)
+        state_key = "analysis_name_doc"
+        auto_key = "analysis_name_doc_auto"
+
+        if default_name:
+            if st.session_state.get(auto_key) != default_name:
+                st.session_state[state_key] = default_name
+                st.session_state[auto_key] = default_name
+
+        nombre_analisis_input = st.text_input(
+            "Nombre del análisis",
+            key=state_key,
+            help="Este nombre aparecerá en el histórico.",
+        )
+        nombre_analisis = nombre_analisis_input.strip() or default_name
+
+        if st.button("🚀 Iniciar Análisis Combinado", use_container_width=True, type="primary"):
+            with st.spinner("Procesando archivos..."):
+                use_pdf_attachments = bool(st.session_state.get("usar_adjuntos_pdf", False))
+                files_payload = [
+                    (
+                        "files",
+                        (file_info["name"], file_info["bytes"], file_info["mime"]),
+                    )
+                    for file_info in processed_files
+                ]
                 response = requests.post(
                     f"{API_URL}/analizar",
-                    files={"file": (uploaded_file.name, uploaded_file, uploaded_file.type)}
+                    files=files_payload,
+                    data={
+                        "use_pdf_attachments": str(use_pdf_attachments).lower(),
+                        "analysis_name": nombre_analisis,
+                    }
                 )
                 if response.status_code == 200:
-                    analisis_id = response.json()["id"]
+                    payload = response.json()
+                    analisis_id = payload["id"]
                     st.session_state.analisis_id = analisis_id
-                    guardar_analisis(analisis_id, uploaded_file.name, "En progreso")
-                    st.toast(f"Análisis iniciado correctamente\n🆔 ID de seguimiento: `{analisis_id[:8]}...`", icon="✅")
+                    nombre_registrado = payload.get("nombre_analisis", nombre_analisis)
+                    guardar_analisis(analisis_id, nombre_registrado, "En progreso")
+                    st.toast(f"Análisis '{nombre_registrado}' iniciado\n🆔 ID de seguimiento: `{analisis_id[:8]}...`", icon="✅")
                     st.rerun()
                 else:
                     st.toast("❌ Error al iniciar el análisis", icon="🚨")
                     st.error("❌ Error al iniciar el análisis")
-        
-        # Botones de control adicionales (simetría con la columna derecha)
+
         st.markdown("<div style='margin-top: 1.5rem;'></div>", unsafe_allow_html=True)
         
         col_clear, col_status = st.columns([1, 2])
@@ -1207,16 +1259,16 @@ with col_izq:
             if st.button(
                 "🗑️ Limpiar", 
                 key="clear_file", 
-                help="Limpiar archivo seleccionado", 
+                help="Limpiar archivos seleccionados", 
                 use_container_width=True, 
                 type="secondary"
             ):
-                # Incrementar el contador para forzar recreación del file_uploader
                 st.session_state.file_uploader_key += 1
-                # También limpiar cualquier otra variable relacionada
+                st.session_state.pop(state_key, None)
+                st.session_state.pop(auto_key, None)
                 if 'analisis_id' in st.session_state:
                     del st.session_state.analisis_id
-                st.toast("🗑️ Archivo eliminado", icon="🗑️")
+                st.toast("🗑️ Archivos eliminados", icon="🗑️")
                 st.rerun()
         
         with col_status:
@@ -1349,8 +1401,8 @@ with col_der:
                 
                 # Si el proceso ya está completado, no mostrarlo pero actualizar BD
                 if api_estado == "completado":
-                    if estado != "✅ Completado":
-                        actualizar_estado_analisis(analisis_id, "✅ Completado")
+                    if estado != "✅ Completed":
+                        actualizar_estado_analisis(analisis_id, "✅ Completed")
                         st.toast(f"✅ Análisis completado: {filename[:20]}...", icon="🎉")
                     continue
                 
@@ -1409,7 +1461,7 @@ with col_der:
                             if isinstance(progreso_json, dict):
                                 preguntas = progreso_json.get('preguntas_originales') or progreso_json.get('resultados', [])
                                 resultados = progreso_json.get('resultados', [])
-                                num_completadas = sum(1 for r in resultados if r.get('Estado') == '✅ Completado')
+                                num_completadas = sum(1 for r in resultados if r.get('Estado') == '✅ Completed')
                                 total = len(preguntas)
                                 progreso_pct = int(100 * num_completadas / max(1, total))
                                 progreso_text = f"{num_completadas}/{total} preguntas"
@@ -1600,7 +1652,7 @@ with st.expander("📚 Histórico de Análisis", expanded=expandir_historico):
         conn = sqlite3.connect(Path(__file__).parent.parent / "analisis.db")
         c = conn.cursor()
         
-        query = "SELECT id, filename, created_at FROM analisis WHERE estado = '✅ Completado'"
+        query = "SELECT id, filename, created_at FROM analisis WHERE estado = '✅ Completed'"
         params = []
         
         if filtro_nombre:
@@ -1887,7 +1939,7 @@ with st.expander("📚 Histórico de Análisis", expanded=expandir_historico):
                     st.markdown(f"""
                         <div style='padding: 0.5rem 0; text-align: center;'>
                             <span style='color: #374151;'>{fecha}</span><br>
-                            <small style='color: #16a34a; font-weight: 500;'>✅ Completado</small>
+                            <small style='color: #16a34a; font-weight: 500;'>✅ Completed</small>
                         </div>
                     """, unsafe_allow_html=True)
                 
@@ -2112,4 +2164,9 @@ with st.expander("📚 Histórico de Análisis", expanded=expandir_historico):
                     </p>
                 </div>
             """, unsafe_allow_html=True)
-
+def _generar_nombre_default(nombres_archivos):
+    if not nombres_archivos:
+        base = "Analisis"
+    else:
+        base = Path(nombres_archivos[0]).stem or "Analisis"
+    return f"{base}_{datetime.now().strftime('%Y%m%d')}"

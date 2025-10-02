@@ -1,76 +1,76 @@
 # AI-CC-Risk-Analyzer 🤖⚖️
 
-Sistema de análisis inteligente de contratos con detección automática de riesgos legales utilizando LLM (Gemini).
+Intelligent contract analysis platform with automatic legal risk detection powered by LLMs (Gemini).
 
-## 🚀 Características Principales
+## 🚀 Key Features
 
-- **Análisis Multimodal**: Soporte para archivos PDF y texto plano
-- **LLM Integrado**: Utiliza Google Gemini para análisis inteligente
-- **Evaluación de Riesgo**: Clasificación automática (Alto/Medio/Bajo)
-- **Interfaz Web**: Frontend en Streamlit con API FastAPI
-- **Logging Detallado**: Seguimiento completo del proceso de análisis
-- **Procesamiento Asíncrono**: Análisis en segundo plano con seguimiento en tiempo real
+- **Multimodal Analysis**: Supports PDF files and plain text
+- **Integrated LLM**: Uses Google Gemini for advanced insights
+- **Risk Assessment**: Automatic classification (High/Medium/Low)
+- **Web Interface**: Streamlit frontend backed by a FastAPI service
+- **Detailed Logging**: Full tracing of every analysis step
+- **Asynchronous Processing**: Background jobs with real-time progress tracking
 
-## 📋 Prerrequisitos
+## 📋 Prerequisites
 
-- Python 3.8 o superior
-- Google API Key para Gemini
+- Python 3.8 or newer
+- Google API Key for Gemini
 - Git
 
-## 🛠️ Instalación
+## 🛠️ Installation
 
-### 1. Clonar el repositorio
+### 1. Clone the repository
 ```bash
-git clone [repositorio]
+git clone [repository]
 cd ai-cc-risk-analyzer
 ```
 
-### 2. Ejecutar script de instalación
+### 2. Run the installation script
 ```bash
 ./install.sh
 ```
-O manualmente:
+Or manually:
 ```bash
 python3 -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 3. Configurar variables de entorno
-Crea un archivo `.env` en el directorio raíz:
+### 3. Configure environment variables
+Create a `.env` file at the project root:
 ```bash
 cp .env.example .env
 ```
 
-Edita el archivo `.env` y agrega tu Google API Key:
+Edit `.env` and add your Google API Key:
 ```env
-GOOGLE_API_KEY=tu_clave_de_google_api_aqui
+GOOGLE_API_KEY=your_google_api_key_here
 ```
 
-Para obtener una API Key:
-1. Visita [Google AI Studio](https://aistudio.google.com/app/apikey)
-2. Crea una nueva API Key
-3. Cópiala al archivo `.env`
+To generate an API key:
+1. Visit [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Create a new API key
+3. Paste it into `.env`
 
-### 4. Verificar instalación
+### 4. Verify the setup
 ```bash
 python test_system.py
 ```
 
-## 🎯 Uso
+## 🎯 Usage
 
-### Scripts de inicio rápido
+### Quick start scripts
 
-#### Método 1: Scripts automatizados
+#### Method 1: Automated scripts
 ```bash
-# Iniciar backend
+# Start the backend
 ./start_backend.sh
 
-# En otra terminal - iniciar frontend  
+# In another terminal - launch the frontend
 cd src && streamlit run main.py
 ```
 
-#### Método 2: Manual
+#### Method 2: Manual launch
 Terminal 1 - Backend:
 ```bash
 cd fastapi_backend
@@ -82,205 +82,205 @@ Terminal 2 - Frontend:
 streamlit run src/main.py
 ```
 
-### Acceder al sistema
+### Access points
 - **Frontend**: http://localhost:8501
 - **Backend API**: http://localhost:8000
-- **Documentación API**: http://localhost:8000/docs
+- **API Docs**: http://localhost:8000/docs
 - **Health Check**: http://localhost:8000/health
 
-## 🧪 Pruebas del Sistema
+## 🧪 System Tests
 
-### Prueba completa automatizada
+### Full automated test
 ```bash
-# 1. Iniciar el backend en una terminal
+# 1. Start the backend in one terminal
 ./start_backend.sh
 
-# 2. En otra terminal, ejecutar la prueba completa
+# 2. In another terminal, run the full test
 python3 test_full_system.py
 ```
 
-Esta prueba verifica:
-- ✅ Conectividad del backend
-- ✅ Health check del sistema
-- ✅ Carga de archivo y análisis asíncrono
-- ✅ Polling de estado (cada 3 segundos como el frontend)
-- ✅ Procesamiento con LLM  
-- ✅ Evaluación de riesgos
+This script verifies:
+- ✅ Backend connectivity
+- ✅ System health check
+- ✅ File upload and asynchronous analysis
+- ✅ Polling (every 3 seconds just like the frontend)
+- ✅ LLM processing
+- ✅ Risk assessment
 
-### Otras pruebas disponibles
+### Additional tests
 ```bash
-# Probar solo el backend
+# Backend-only test
 python test_backend.py
 
-# Probar solo el LLM
+# LLM-only test
 python test_system.py
 ```
 
-### Subir y analizar documentos
+### Uploading and analyzing documents
 
-1. **Nuevo Análisis**:
-   - Accede a http://localhost:8501
-   - Sube un archivo PDF o de texto
-   - El sistema realizará análisis asíncrono con preguntas predefinidas
-   - El frontend hace polling cada 3 segundos para mostrar el progreso
-   - Monitorea el estado en tiempo real
+1. **New Analysis**:
+   - Open http://localhost:8501
+   - Upload a PDF or text document
+   - The system starts an asynchronous analysis with predefined questions
+   - The frontend polls the backend every 3 seconds to display progress
+   - Monitor the status in real time
 
-2. **Ver Resultados**:
-   - Resultados detallados por pregunta
-   - Evaluación de riesgo automática (Alto/Medio/Bajo)
-   - Respuestas generadas por LLM
-   - Opciones de exportación
+2. **View Results**:
+   - Detailed responses per question
+   - Automatic risk evaluation (High/Medium/Low)
+   - LLM-generated answers
+   - Export options
 
-3. **Re-análisis**:
-   - Modificar preguntas individuales  
-   - Re-análisis global con preguntas editadas
-   - Comparación de resultados
+3. **Re-analysis**:
+   - Edit individual questions
+   - Re-run the analysis with the modified questions
+   - Compare results across runs
 
-### Flujo técnico
-1. Frontend sube archivo → Backend (`/analizar`)
-2. Backend guarda archivo con extensión original
-3. Worker inicia análisis asíncrono en segundo plano
-4. Frontend consulta estado cada 3s (`/estado/{id}`)
-5. Worker procesa cada pregunta con Gemini LLM
-6. Sistema actualiza progreso granularmente
-7. Frontend muestra resultados finales
+### Technical flow
+1. Frontend uploads the file → Backend (`/analizar`)
+2. Backend saves the file with its original extension
+3. Worker starts an asynchronous background analysis
+4. Frontend polls `/estado/{id}` every 3 seconds
+5. Worker processes each question with Gemini LLM
+6. The system updates granular progress
+7. Frontend renders the final results
 
-## 📊 Estructura del Proyecto
+## 📊 Project Structure
 
 ```
 ai-cc-risk-analyzer/
 ├── fastapi_backend/           # API Backend
-│   ├── main.py               # Endpoints de la API
-│   ├── worker.py             # Lógica de análisis LLM
-│   ├── contratos/            # Archivos subidos
-│   ├── progreso/             # Estados de análisis
+│   ├── main.py               # API endpoints
+│   ├── worker.py             # LLM analysis logic
+│   ├── contratos/            # Uploaded files
+│   ├── progreso/             # Analysis states
 │   └── preguntas-risk-analyzer.xlsx
-├── src/                      # Frontend Streamlit
+├── src/                      # Streamlit frontend
 │   ├── main.py
 │   ├── pages/
 │   └── db/
-├── requirements.txt          # Dependencias
-├── test_system.py           # Script de verificación
-├── install.sh               # Script de instalación
-└── .env.example             # Plantilla de configuración
+├── requirements.txt          # Dependencies
+├── test_system.py            # Validation script
+├── install.sh                # Installation helper
+└── .env.example              # Environment template
 ```
 
-## 🔧 Configuración Avanzada
+## 🔧 Advanced Configuration
 
-### Variables de entorno disponibles
+### Available environment variables
 ```env
-GOOGLE_API_KEY=tu_clave        # Requerida
-LOG_LEVEL=INFO                 # Opcional
-PORT=8000                      # Opcional
-HOST=localhost                 # Opcional
+GOOGLE_API_KEY=your_key        # Required
+LOG_LEVEL=INFO                 # Optional
+PORT=8000                      # Optional
+HOST=localhost                 # Optional
 ```
 
 ### Logging
-Los logs se guardan en:
-- `fastapi_backend/analisis.log` (análisis detallado)
-- Consola (logs en tiempo real)
+Logs are stored in:
+- `fastapi_backend/analisis.log` (detailed analysis log)
+- Console output (real-time logs)
 
-### Personalizar preguntas
-Edita el archivo `fastapi_backend/preguntas-risk-analyzer.xlsx` para modificar las preguntas de análisis.
+### Customizing questions
+Edit `fastapi_backend/preguntas-risk-analyzer.xlsx` to change the analysis questions.
 
-## ✅ Validación del Sistema
+## ✅ System Validation
 
-### Verificación rápida
+### Quick validation
 ```bash
-# Valida que todo esté configurado correctamente
+# Check that everything is configured correctly
 python3 validate_system.py
 ```
 
-Este script verifica:
-- 📂 Archivos requeridos
-- 🔐 Variables de entorno  
-- 📦 Dependencias Python
-- 📁 Estructura de directorios
+This script verifies:
+- 📂 Required files
+- 🔐 Environment variables
+- 📦 Python dependencies
+- 📁 Directory structure
 
-### Flujo de validación completo
+### Full validation flow
 ```bash
-# 1. Validar configuración
+# 1. Validate configuration
 python3 validate_system.py
 
-# 2. Iniciar backend 
+# 2. Start the backend
 ./start_backend.sh
 
-# 3. Probar sistema completo
+# 3. Run the full system test
 python3 test_full_system.py
 ```
 
-## 🐛 Resolución de Problemas
+## 🐛 Troubleshooting
 
-### Problema: El análisis se cuelga
-**Diagnóstico**: 
+### Issue: The analysis hangs
+**Diagnose**:
 ```bash
-# Verificar logs del backend
+# Check backend logs
 tail -f fastapi_backend/analisis.log
 
-# Verificar estado del sistema
+# Check system status
 curl http://localhost:8000/health
 ```
-**Solución**: Verifica los logs en `analisis.log` y la consola para identificar el error específico.
+**Solution**: Inspect `analisis.log` and the console for specific errors.
 
-### Problema: Error de API Key
+### Issue: API Key error
 ```
-❌ GOOGLE_API_KEY no está configurada
+❌ GOOGLE_API_KEY is not configured
 ```
-**Solución**: 
-1. Ejecuta `python3 validate_system.py` para diagnóstico
-2. Verifica que el archivo `.env` existe con el formato correcto
-3. Confirma que la API Key es válida en [Google AI Studio](https://aistudio.google.com/app/apikey)
-4. Reinicia el servidor
+**Solution**:
+1. Run `python3 validate_system.py` for diagnostics
+2. Confirm that `.env` exists and has the correct format
+3. Make sure the API key is valid in [Google AI Studio](https://aistudio.google.com/app/apikey)
+4. Restart the server
 
-### Problema: Dependencias faltantes
-**Solución**:
+### Issue: Missing dependencies
+**Solution**:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Problema: Archivo de preguntas no encontrado
-**Solución**: Verifica que `fastapi_backend/preguntas-risk-analyzer.xlsx` existe.
+### Issue: Questions file not found
+**Solution**: Confirm that `fastapi_backend/preguntas-risk-analyzer.xlsx` exists.
 
-### Problema: Frontend no puede conectar al backend
-**Verificar**:
+### Issue: Frontend cannot reach the backend
+**Check**:
 ```bash
-# ¿Está el backend funcionando?
+# Is the backend running?
 curl http://localhost:8000/health
 
-# ¿Hay errores en los logs?
+# Any errors in the logs?
 tail fastapi_backend/analisis.log
 ```
 
 ## 📝 API Endpoints
 
-- `POST /analizar` - Iniciar nuevo análisis
-- `GET /estado/{id}` - Consultar progreso
-- `POST /reanalisar_pregunta/{id}/{num}` - Re-analizar pregunta individual
-- `POST /reanalisar_global/{id}` - Re-analizar todas las preguntas
-- `GET /health` - Estado del sistema
+- `POST /analizar` - Start a new analysis
+- `GET /estado/{id}` - Retrieve analysis progress
+- `POST /reanalisar_pregunta/{id}/{num}` - Re-analyze a single question
+- `POST /reanalisar_global/{id}` - Re-run all questions
+- `GET /health` - System health status
 
-## 🔄 Actualizaciones Recientes
+## 🔄 Recent Updates
 
-### v2.0 - Integración LLM
-- ✅ Integración completa con Google Gemini
-- ✅ Análisis multimodal (PDF + texto)
-- ✅ Evaluación automática de riesgo
-- ✅ Logging detallado
+### v2.0 - LLM Integration
+- ✅ Full integration with Google Gemini
+- ✅ Multimodal analysis (PDF + text)
+- ✅ Automatic risk evaluation
+- ✅ Detailed logging
 - ✅ Health checks
-- ✅ Manejo mejorado de errores
+- ✅ Improved error handling
 
-## 📞 Soporte
+## 📞 Support
 
-Para problemas o preguntas:
-1. Ejecuta `python test_system.py` para diagnóstico
-2. Verifica los logs en `analisis.log`
-3. Consulta la documentación de la API en `/docs`
+If you encounter issues:
+1. Run `python test_system.py` for diagnostics
+2. Inspect `analisis.log`
+3. Review the API documentation at `/docs`
 
-## 🔐 Seguridad
+## 🔐 Security
 
-- Las API Keys se manejan como variables de entorno
-- Los archivos se almacenan localmente de forma temporal
-- No se envía información sensible a logs públicos
+- API keys are managed through environment variables
+- Files are stored locally and temporarily
+- Sensitive data is never written to public logs
 
 ---
-*Sistema desarrollado para análisis automatizado de contratos con IA* 🤖⚖️
+*System developed for automated contract analysis with AI* 🤖⚖️

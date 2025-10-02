@@ -2,15 +2,35 @@ import streamlit as st
 import requests
 import time
 import json
+import html
 from pathlib import Path
 from db.analisis_db import obtener_analisis_pendientes, actualizar_estado_analisis
 
 API_URL = "http://localhost:8000"  # Cambiar en producción
 
+# Utilidades de caché para evitar lecturas repetidas del JSON de progreso cada 3s
+def _progreso_path(analisis_id: str) -> Path:
+    return Path(__file__).parent.parent.parent.parent / "fastapi_backend" / "progreso" / f"{analisis_id}.json"
+
+def _progreso_mtime(analisis_id: str) -> float:
+    try:
+        return _progreso_path(analisis_id).stat().st_mtime
+    except Exception:
+        return 0.0
+
+@st.cache_data(show_spinner=False)
+def _leer_progreso_cached(analisis_id: str, mtime: float):
+    p = _progreso_path(analisis_id)
+    if not p.exists():
+        return None
+    with open(p, "r", encoding="utf-8") as f:
+        return json.load(f)
+
 def verificar_backend_disponible():
     """Verifica si el backend está disponible"""
     try:
-        response = requests.get(f"{API_URL}/health", timeout=5)
+        # Timeout bajo para no bloquear la UI
+        response = requests.get(f"{API_URL}/health", timeout=1)
         return response.status_code == 200
     except:
         return False
@@ -19,7 +39,7 @@ def cancelar_proceso(analisis_id):
     """Cancela un proceso de análisis"""
     try:
         # Intentar cancelar en el backend
-        response = requests.delete(f"{API_URL}/proceso/{analisis_id}", timeout=10)
+        response = requests.delete(f"{API_URL}/proceso/{analisis_id}", timeout=2)
         
         # Eliminar archivo de progreso si existe
         progreso_path = Path(__file__).parent.parent.parent.parent / "fastapi_backend" / "progreso" / f"{analisis_id}.json"
@@ -191,17 +211,20 @@ def mostrar_procesos_en_tiempo_real():
             # Consultar el estado real desde la API
             api_estado = None
             api_detalle = None
+            api_data = {}
             try:
-                resp = requests.get(f"{API_URL}/estado/{analisis_id}", timeout=5)
+                # Reducir timeout y evitar saturar el backend
+                resp = requests.get(f"{API_URL}/estado/{analisis_id}", timeout=1)
                 if resp.status_code == 200:
                     data = resp.json()
                     api_estado = data.get("estado")
                     api_detalle = data.get("detalle", "")
+                    api_data = data
             except Exception:
                 api_estado = None
             
             # Verificar si existe archivo de progreso para determinar estado más preciso
-            progreso_path = Path(__file__).parent.parent.parent.parent / "fastapi_backend" / "progreso" / f"{analisis_id}.json"
+            progreso_path = _progreso_path(analisis_id)
             progreso_existe = progreso_path.exists()
             progreso_pct = 0  # Inicializar
             progreso_data = None  # Para usar más tarde
@@ -209,8 +232,8 @@ def mostrar_procesos_en_tiempo_real():
             # Si existe archivo de progreso, calcular porcentaje real
             if progreso_existe:
                 try:
-                    with open(progreso_path, "r", encoding="utf-8") as f:
-                        progreso_data = json.load(f)
+                    mtime = _progreso_mtime(analisis_id)
+                    progreso_data = _leer_progreso_cached(analisis_id, mtime)
                     
                     # Validar que tenemos datos válidos
                     if not isinstance(progreso_data, dict):
@@ -266,7 +289,7 @@ def mostrar_procesos_en_tiempo_real():
                     completado = True
             
             if completado:
-                actualizar_estado_analisis(analisis_id, "✅ Completado")
+                actualizar_estado_analisis(analisis_id, "✅ Completed")
                 continue
             
             hay_procesos_activos = True
@@ -366,6 +389,134 @@ def mostrar_procesos_en_tiempo_real():
                             '>{texto_estado}</div>
                         </div>
                 """, unsafe_allow_html=True)
+
+                fuente_metadata = {}
+                if isinstance(api_data, dict):
+                    fuente_metadata.update(api_data)
+                if progreso_data and isinstance(progreso_data, dict):
+                    fuente_metadata.update(progreso_data)
+
+                modelo_llm = fuente_metadata.get('modelo_llm') or fuente_metadata.get('llm_modelo') or fuente_metadata.get('llm')
+                proveedor_llm = fuente_metadata.get('proveedor_llm') or fuente_metadata.get('origen_llm')
+
+                paginas_total = fuente_metadata.get('total_paginas')
+                if isinstance(paginas_total, str):
+                    try:
+                        paginas_total = int(paginas_total)
+                    except ValueError:
+                        paginas_total = None
+                elif isinstance(paginas_total, (int, float)):
+                    paginas_total = int(paginas_total)
+                else:
+                    paginas_total = None
+
+                documentos_info = fuente_metadata.get('documentos_info')
+                if isinstance(documentos_info, str):
+                    try:
+                        documentos_info = json.loads(documentos_info)
+                    except Exception:
+                        documentos_info = []
+                if not isinstance(documentos_info, list):
+                    documentos_info = []
+
+                paginas_sum = sum(
+                    int(doc.get('paginas', 0))
+                    for doc in documentos_info
+                    if isinstance(doc, dict) and isinstance(doc.get('paginas'), (int, float))
+                )
+                if paginas_sum and paginas_sum > 0:
+                    paginas_total = paginas_sum
+
+                if paginas_total and paginas_total > 0:
+                    paginas_label = f"{paginas_total} página{'s' if paginas_total != 1 else ''}"
+                elif paginas_total == 0:
+                    paginas_label = "0 páginas"
+                else:
+                    paginas_label = "Sin datos"
+
+                if proveedor_llm and modelo_llm:
+                    llm_label = f"{proveedor_llm} · {modelo_llm}"
+                elif modelo_llm:
+                    llm_label = str(modelo_llm)
+                elif proveedor_llm:
+                    llm_label = proveedor_llm
+                else:
+                    llm_label = "Sin datos"
+
+                st.markdown(
+                    """
+                    <div style='display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.2rem 0 0.4rem 0;'>
+                        <span style='
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.25rem;
+                            background: #eff6ff;
+                            color: #1d4ed8;
+                            padding: 0.2rem 0.45rem;
+                            border-radius: 999px;
+                            font-size: 0.65rem;
+                            font-weight: 600;
+                        '>🤖 {llm_label}</span>
+                        <span style='
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.25rem;
+                            background: #f1f5f9;
+                            color: #0f172a;
+                            padding: 0.2rem 0.45rem;
+                            border-radius: 999px;
+                            font-size: 0.65rem;
+                            font-weight: 600;
+                        '>📄 Páginas: {paginas_label}</span>
+                    </div>
+                    """.format(llm_label=llm_label, paginas_label=paginas_label),
+                    unsafe_allow_html=True
+                )
+
+                if documentos_info:
+                    badges = []
+                    for doc in documentos_info:
+                        if not isinstance(doc, dict):
+                            continue
+                        nombre_raw = doc.get('nombre', 'Documento') or 'Documento'
+                        nombre_trunc = nombre_raw[:30] + ('…' if len(nombre_raw) > 30 else '')
+                        nombre_html = html.escape(nombre_trunc)
+                        paginas_doc = doc.get('paginas')
+                        if isinstance(paginas_doc, (int, float)) and paginas_doc >= 0:
+                            paginas_doc = int(paginas_doc)
+                            paginas_doc_label = f"{paginas_doc} pág."
+                        else:
+                            paginas_doc_label = "–"
+                        badges.append(
+                            f"<span style=\"display:inline-flex;align-items:center;gap:0.25rem;"
+                            f"background:#f8fafc;color:#0f172a;padding:0.2rem 0.45rem;border-radius:999px;"
+                            f"font-size:0.62rem;font-weight:600;\">📄 {nombre_html}"
+                            f"<span style=\"color:#475569;\">({paginas_doc_label})</span></span>"
+                        )
+
+                    if badges:
+                        st.markdown(
+                            """
+                            <div style='
+                                display: flex;
+                                flex-direction: column;
+                                gap: 0.25rem;
+                                margin: -0.1rem 0 0.4rem 0;
+                            '>
+                                <span style='
+                                    color: #0f172a;
+                                    font-size: 0.65rem;
+                                    font-weight: 600;
+                                '>Documentos</span>
+                                <div style='
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    gap: 0.3rem;
+                                '>{badges}</div>
+                            </div>
+                            """.format(badges="".join(badges)),
+                            unsafe_allow_html=True,
+                        )
                 
                 # Progreso con información detallada
                 if progreso_existe and progreso_data:
@@ -611,14 +762,14 @@ def mostrar_procesos():
         # Análisis completados hoy
         c.execute("""
             SELECT COUNT(*) FROM analisis 
-            WHERE date(created_at) = date('now') AND estado = '✅ Completado'
+            WHERE date(created_at) = date('now') AND estado = '✅ Completed'
         """)
         completados_hoy = c.fetchone()[0]
         
         # Calcular tiempo promedio dinámico
         c.execute("""
             SELECT COUNT(*) FROM analisis 
-            WHERE estado = '✅ Completado' AND date(created_at) >= date('now', '-7 days')
+            WHERE estado = '✅ Completed' AND date(created_at) >= date('now', '-7 days')
         """)
         completados_semana = c.fetchone()[0]
         

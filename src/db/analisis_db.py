@@ -18,6 +18,12 @@ def init_db():
     columns = [row[1] for row in c.fetchall()]
     if "resultados_json" not in columns:
         c.execute("ALTER TABLE analisis ADD COLUMN resultados_json TEXT")
+    # Índices para acelerar filtros/ordenación frecuentes
+    try:
+        c.execute("CREATE INDEX IF NOT EXISTS idx_analisis_created_at ON analisis(created_at)")
+        c.execute("CREATE INDEX IF NOT EXISTS idx_analisis_estado ON analisis(estado)")
+    except Exception:
+        pass
     conn.commit()
     conn.close()
 
@@ -41,7 +47,7 @@ def actualizar_estado_analisis(id, estado, resultados_json=None):
 def obtener_analisis_pendientes():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT id, filename, estado FROM analisis WHERE (estado != '✅ Completado' AND estado != '❌ Cancelado') OR estado IS NULL ORDER BY created_at DESC")
+    c.execute("SELECT id, filename, estado FROM analisis WHERE (estado != '✅ Completed' AND estado != '❌ Cancelado') OR estado IS NULL ORDER BY created_at DESC")
     rows = c.fetchall()
     conn.close()
     return rows

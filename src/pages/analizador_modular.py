@@ -308,7 +308,7 @@ with st.sidebar:
         c.execute("SELECT COUNT(*) FROM analisis")
         total = c.fetchone()[0]
         
-        c.execute("SELECT COUNT(*) FROM analisis WHERE estado = '✅ Completado'")
+        c.execute("SELECT COUNT(*) FROM analisis WHERE estado = '✅ Completed'")
         completados = c.fetchone()[0]
         
         from db.analisis_db import obtener_analisis_pendientes

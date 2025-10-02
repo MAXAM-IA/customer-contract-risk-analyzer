@@ -29,6 +29,18 @@ st.set_page_config(
     layout="wide"
 )
 
+if "usar_adjuntos_pdf" not in st.session_state:
+    st.session_state.usar_adjuntos_pdf = False
+
+with st.sidebar:
+    st.toggle(
+        "Attach original PDF to LLM",
+        value=False,
+        disabled=True,
+        help="Uses extracted text by default for consistent analyses."
+    )
+
+
 def get_base64_of_bin_file(bin_file):
     """Devuelve la cadena base64 de un archivo binario."""
     with open(bin_file, "rb") as f:

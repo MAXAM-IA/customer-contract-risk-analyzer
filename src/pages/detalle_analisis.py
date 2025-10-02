@@ -123,7 +123,7 @@ else:
     preguntas = resultados  # fallback legacy
 
 # --- PROGRESO GENERAL ---
-num_completadas = sum(1 for r in resultados if r.get('Estado') == '✅ Completado')
+num_completadas = sum(1 for r in resultados if r.get('Estado') == '✅ Completed')
 progreso_pct = int(100 * num_completadas / max(1, len(preguntas)))
 st.markdown(f"<div class='maxam-detalle-card'><div class='maxam-detalle-title'>Detalle de Análisis</div><div class='maxam-detalle-meta'>ID: <code>{analisis_id[:8]}</code> &nbsp;|&nbsp; Preguntas: {len(preguntas)}</div></div>", unsafe_allow_html=True)
 st.progress(progreso_pct, text=f"Progreso: {num_completadas}/{len(preguntas)} preguntas completadas")

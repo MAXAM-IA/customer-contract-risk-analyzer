@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, BackgroundTasks, Request
+from fastapi import FastAPI, UploadFile, BackgroundTasks, Request, Form, File
 from fastapi.responses import JSONResponse
 import uuid
 import os
@@ -7,6 +7,30 @@ import logging
 from pathlib import Path
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
+from typing import List, Any
+from numbers import Real
+import math
+
+
+def _generar_nombre_default(nombres_archivos: List[str]) -> str:
+    base = "Analisis"
+    if nombres_archivos:
+        primer_nombre = Path(nombres_archivos[0]).stem
+        if primer_nombre:
+            base = primer_nombre
+    fecha_tag = datetime.now().strftime("%Y%m%d")
+    return f"{base}_{fecha_tag}"
+
+
+def _sanitize_json_for_response(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {k: _sanitize_json_for_response(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_sanitize_json_for_response(item) for item in value]
+    if isinstance(value, Real):
+        if math.isnan(value) or math.isinf(value):
+            return None
+    return value
 
 # Cargar variables de entorno desde .env si existe
 try:
@@ -62,51 +86,119 @@ PROGRESO_DIR.mkdir(exist_ok=True)
 logger.info(f"Sistema iniciado. BASE_DIR: {BASE_DIR}")
 logger.info(f"PREGUNTAS_PATH: {PREGUNTAS_PATH}, existe: {PREGUNTAS_PATH.exists()}")
 
+
+def _obtener_paths_contrato(id_analisis: str) -> List[Path]:
+    """Recupera todos los archivos asociados a un análisis."""
+    contratos_dir = BASE_DIR / "contratos"
+    analisis_dir = contratos_dir / id_analisis
+
+    if analisis_dir.exists() and analisis_dir.is_dir():
+        return sorted([p for p in analisis_dir.iterdir() if p.is_file()])
+
+    # Compatibilidad con análisis antiguos donde el contrato era un único archivo
+    legacy_files = sorted(contratos_dir.glob(f"{id_analisis}*"))
+    return [p for p in legacy_files if p.is_file()]
+
 @app.post("/analizar")
-async def iniciar_analisis(file: UploadFile, background_tasks: BackgroundTasks):
+async def iniciar_analisis(
+    background_tasks: BackgroundTasks,
+    use_pdf_attachments: bool = Form(False),
+    analysis_name: str = Form(None),
+    files: List[UploadFile] = File(None),
+    file: UploadFile | None = File(None),
+):
+    uploads: List[UploadFile] = []
+    if files:
+        uploads.extend([f for f in files if f is not None])
+    if file is not None:
+        uploads.append(file)
+
+    if not uploads:
+        return JSONResponse(status_code=400, content={"error": "No se adjuntaron archivos para el análisis"})
+
     id_analisis = str(uuid.uuid4())
-    logger.info(f"🔥 INICIO ANÁLISIS - ID: {id_analisis}, Archivo: {file.filename}, Tamaño: {file.size if hasattr(file, 'size') else 'N/A'}")
-    
+    nombres_archivos = [u.filename or f"documento_{idx+1}" for idx, u in enumerate(uploads)]
+    logger.info(
+        "🔥 INICIO ANÁLISIS - ID: %s, Archivos: %s",
+        id_analisis,
+        ", ".join(nombres_archivos),
+    )
+
     try:
         contratos_dir = BASE_DIR / "contratos"
         contratos_dir.mkdir(exist_ok=True)
-        logger.info(f"📁 Directorio contratos creado/verificado: {contratos_dir}")
-        
-        # Mantener la extensión original del archivo
-        extension = ""
-        if file.filename:
-            extension = Path(file.filename).suffix
-            logger.info(f"📋 Extensión detectada: {extension}")
-        contrato_path = contratos_dir / f"{id_analisis}{extension}"
-        logger.info(f"💾 Guardando archivo en: {contrato_path}")
 
-        content = await file.read()
-        logger.info(f"📖 Contenido leído, tamaño: {len(content)} bytes")
-        
-        with open(contrato_path, "wb") as f:
-            f.write(content)
-        logger.info(f"✅ Archivo guardado exitosamente")
+        analisis_dir = contratos_dir / id_analisis
+        analisis_dir.mkdir(exist_ok=True)
+        logger.info(f"📁 Directorio del análisis creado: {analisis_dir}")
+
+        stored_paths: List[Path] = []
+        cleaned_names: List[str] = []
+
+        for index, upload in enumerate(uploads, start=1):
+            original_name = upload.filename or f"documento_{index}"
+            safe_name = f"{index:02d}_{Path(original_name).name}"
+            destino = analisis_dir / safe_name
+
+            contenido = await upload.read()
+            with open(destino, "wb") as f:
+                f.write(contenido)
+
+            logger.info(
+                "💾 Archivo guardado: %s (%d bytes)",
+                destino,
+                len(contenido),
+            )
+
+            stored_paths.append(destino)
+            cleaned_names.append(original_name)
 
         progreso_path = PROGRESO_DIR / f"{id_analisis}.json"
         logger.info(f"📊 Creando archivo de progreso: {progreso_path}")
-        
-        # Crea un archivo de progreso inicial vacío
+
+        analysis_name = (analysis_name or "").strip()
+        if not analysis_name:
+            analysis_name = _generar_nombre_default(cleaned_names)
+
+        logger.info(f"🆔 Nombre del análisis: {analysis_name}")
+
         with open(progreso_path, "w", encoding="utf-8") as f:
-            json.dump({"estado": "en_cola", "resultados": []}, f)
-        logger.info(f"✅ Archivo de progreso creado")
-        
-        # Verificar que el archivo de preguntas existe
+            json.dump({
+                "estado": "en_cola",
+                "resultados": [],
+                "archivos": cleaned_names,
+                "nombre_analisis": analysis_name,
+                "documentos_info": [
+                    {
+                        "nombre": name,
+                        "extension": Path(name).suffix,
+                        "paginas": None,
+                    }
+                    for name in cleaned_names
+                ],
+            }, f)
+        logger.info("✅ Archivo de progreso inicializado")
+
         if not PREGUNTAS_PATH.exists():
             logger.error(f"❌ ARCHIVO DE PREGUNTAS NO ENCONTRADO: {PREGUNTAS_PATH}")
             return JSONResponse(status_code=500, content={"error": "Archivo de preguntas no encontrado"})
-        
-        logger.info(f"🚀 Lanzando análisis en segundo plano...")
-        # Lanza el análisis en segundo plano
-        background_tasks.add_task(analizar_documento, contrato_path, PREGUNTAS_PATH, progreso_path)
-        logger.info(f"✅ Análisis enviado a cola de procesamiento - ID: {id_analisis}")
-        
-        return {"id": id_analisis}
-        
+
+        logger.info("🚀 Lanzando análisis en segundo plano con %d archivo(s)...", len(stored_paths))
+        background_tasks.add_task(
+            analizar_documento,
+            stored_paths,
+            PREGUNTAS_PATH,
+            progreso_path,
+            use_pdf_attachments,
+        )
+
+        return {
+            "id": id_analisis,
+            "archivos": cleaned_names,
+             "nombre_analisis": analysis_name,
+            "use_pdf_attachments": use_pdf_attachments,
+        }
+
     except Exception as e:
         logger.error(f"❌ ERROR EN ANÁLISIS {id_analisis}: {str(e)}", exc_info=True)
         return JSONResponse(status_code=500, content={"error": f"Error al procesar archivo: {str(e)}"})
@@ -131,6 +223,7 @@ def listar_procesos():
                     "id": archivo_progreso.stem,
                     "estado": data.get("estado", "desconocido"),
                     "fecha_modificacion": datetime.fromtimestamp(archivo_progreso.stat().st_mtime).isoformat(),
+                    "nombre_analisis": data.get("nombre_analisis"),
                 }
                 
                 # Agregar información adicional si está disponible
@@ -188,20 +281,20 @@ def obtener_estado(id_analisis: str):
             data["porcentaje"] = porcentaje
             
             logger.info(f"📈 Progreso calculado: {progreso}/{total} = {porcentaje}%")
-            return data
+            return _sanitize_json_for_response(data)
             
         # Si es una lista, es el formato antiguo
         if isinstance(data, list):
             completado = all(row.get("Estado") == "✅ Completado" for row in data) and len(data) > 0
-            return {
+            return _sanitize_json_for_response({
                 "estado": "completado" if completado else "en_progreso",
                 "resultados": data,
                 "porcentaje": 100 if completado else 0
-            }
+            })
         # Si es un error
         if isinstance(data, dict) and "error" in data:
             return {"estado": "error", "resultados": [], "error": data["error"], "porcentaje": 0}
-        return {"estado": "en_progreso", "resultados": [], "porcentaje": 0}
+        return _sanitize_json_for_response({"estado": "en_progreso", "resultados": [], "porcentaje": 0})
         
     except Exception as e:
         logger.error(f"❌ Error al leer archivo de progreso {path}: {str(e)}")
@@ -246,12 +339,10 @@ async def reanalizar_pregunta(id_analisis: str, num_pregunta: int, request: Requ
     seccion = seccion_modificada or pregunta_original.get("Sección", "")
     
     # Verificar que el contrato original existe
-    contrato_files = list((BASE_DIR / "contratos").glob(f"{id_analisis}*"))
+    contrato_files = _obtener_paths_contrato(id_analisis)
     if not contrato_files:
         return JSONResponse(status_code=404, content={"error": "No existe el contrato original"})
-    
-    contrato_path = contrato_files[0]
-    
+
     # NO crear nuevo ID, usar el mismo análisis original para sobreescribir
     # Actualizar estado a "reanalisis_en_progreso" para indicar que está re-procesándose
     progreso_original["estado"] = "reanalisis_en_progreso"
@@ -270,7 +361,12 @@ async def reanalizar_pregunta(id_analisis: str, num_pregunta: int, request: Requ
     }
     
     # Lanzar el re-análisis individual en segundo plano usando el MISMO archivo de progreso
-    background_tasks.add_task(reanalizar_pregunta_individual_sobreescribir, contrato_path, pregunta_data, original_path)
+    background_tasks.add_task(
+        reanalizar_pregunta_individual_sobreescribir,
+        contrato_files,
+        pregunta_data,
+        original_path,
+    )
     
     logger.info(f"Re-análisis individual iniciado para pregunta {num_pregunta} del análisis {id_analisis}. SOBREESCRIBIENDO análisis original.")
     return {"id": id_analisis, "mensaje": "Re-análisis individual iniciado (sobreescribiendo análisis original)"}
@@ -290,12 +386,10 @@ async def reanalizar_global(id_analisis: str, request: Request, background_tasks
         return JSONResponse(status_code=404, content={"error": "No existe el análisis original"})
     
     # Verificar que el contrato original existe
-    contrato_files = list((BASE_DIR / "contratos").glob(f"{id_analisis}*"))
+    contrato_files = _obtener_paths_contrato(id_analisis)
     if not contrato_files:
         return JSONResponse(status_code=404, content={"error": "No existe el contrato original"})
-    
-    contrato_path = contrato_files[0]
-    
+
     # NO crear nuevo ID, usar el mismo análisis original para sobreescribir
     # Leer progreso original y actualizar estado
     with open(original_path, "r", encoding="utf-8") as f:
@@ -312,7 +406,12 @@ async def reanalizar_global(id_analisis: str, request: Request, background_tasks
         json.dump(progreso_original, f, ensure_ascii=False, indent=2)
     
     # Lanzar el análisis en segundo plano con las preguntas editadas USANDO EL MISMO archivo de progreso
-    background_tasks.add_task(reanalizar_documento_global_sobreescribir, contrato_path, preguntas_editadas, original_path)
+    background_tasks.add_task(
+        reanalizar_documento_global_sobreescribir,
+        contrato_files,
+        preguntas_editadas,
+        original_path,
+    )
     
     logger.info(f"Reanálisis global iniciado para {id_analisis}. SOBREESCRIBIENDO análisis original.")
     return {"id": id_analisis, "mensaje": "Reanálisis global iniciado (sobreescribiendo análisis original)"}
@@ -375,13 +474,9 @@ async def cancelar_proceso(id_analisis: str):
     try:
         # Verificar si el proceso existe
         progreso_path = PROGRESO_DIR / f"{id_analisis}.json"
-        contrato_path = None
-        
-        # Buscar el archivo del contrato para eliminarlo también
+        contrato_paths = _obtener_paths_contrato(id_analisis)
         contratos_dir = BASE_DIR / "contratos"
-        for archivo in contratos_dir.glob(f"{id_analisis}.*"):
-            contrato_path = archivo
-            break
+        analisis_dir = contratos_dir / id_analisis
         
         if not progreso_path.exists():
             logger.warning(f"⚠️ Proceso {id_analisis} no encontrado")
@@ -414,10 +509,26 @@ async def cancelar_proceso(id_analisis: str):
             logger.info(f"🗑️ Archivo de progreso eliminado: {progreso_path}")
         
         # Eliminar archivo del contrato
-        if contrato_path and contrato_path.exists():
-            contrato_path.unlink()
-            logger.info(f"🗑️ Archivo de contrato eliminado: {contrato_path}")
-        
+        eliminados = []
+        if analisis_dir.exists() and analisis_dir.is_dir():
+            for archivo in analisis_dir.iterdir():
+                try:
+                    archivo.unlink()
+                    eliminados.append(str(archivo))
+                except Exception as e:
+                    logger.warning(f"⚠️ No se pudo eliminar {archivo}: {e}")
+            try:
+                analisis_dir.rmdir()
+                logger.info(f"🗑️ Directorio de contratos eliminado: {analisis_dir}")
+            except Exception as e:
+                logger.warning(f"⚠️ No se pudo eliminar el directorio {analisis_dir}: {e}")
+        else:
+            for archivo in contrato_paths:
+                if archivo.exists():
+                    archivo.unlink()
+                    eliminados.append(str(archivo))
+                    logger.info(f"🗑️ Archivo de contrato eliminado: {archivo}")
+
         logger.info(f"✅ Proceso {id_analisis} cancelado exitosamente")
         
         return JSONResponse(content={
@@ -426,7 +537,7 @@ async def cancelar_proceso(id_analisis: str):
             "estado_anterior": estado_actual,
             "archivos_eliminados": {
                 "progreso": str(progreso_path) if progreso_path.exists() else None,
-                "contrato": str(contrato_path) if contrato_path and contrato_path.exists() else None
+                "contratos": eliminados,
             }
         })
         
